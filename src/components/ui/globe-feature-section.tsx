@@ -154,6 +154,10 @@ export function Globe({
         className
       )}
     >
+      {/* Subtle gradient overlay for depth */}
+      <div className="absolute inset-0 pointer-events-none z-10 rounded-2xl bg-gradient-to-br from-background/20 via-transparent to-foreground/10" />
+      <div className="absolute inset-0 pointer-events-none z-10 rounded-2xl bg-gradient-to-t from-background/30 via-transparent to-transparent" />
+      
       <canvas
         ref={canvasRef}
         className="h-full w-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
