@@ -64,13 +64,15 @@ export function Globe({
     phi: 0,
     theta: 0.3,
     dark: isDark ? 1 : 0,
-    diffuse: isDark ? 1.2 : 0.6,
+    diffuse: isDark ? 1.1 : 0.45,
     mapSamples: 16000,
-    mapBrightness: isDark ? 6 : 1.5,
-    // Match background: light mode ~hsl(225, 25%, 92%) = rgb(225, 227, 233) / dark mode ~hsl(220, 20%, 10%) = rgb(21, 24, 28)
-    baseColor: isDark ? [0.08, 0.09, 0.11] : [0.88, 0.89, 0.91],
-    markerColor: isDark ? [0.5, 0.6, 0.75] : [0.35, 0.38, 0.45],
-    glowColor: isDark ? [0.08, 0.09, 0.11] : [0.88, 0.89, 0.91],
+    // Lower brightness in light mode to avoid a "white sticker" look
+    mapBrightness: isDark ? 5.5 : 0.85,
+    // Match background: light mode ~hsl(225, 25%, 92%) / dark mode ~hsl(220, 20%, 10%)
+    baseColor: isDark ? [0.07, 0.08, 0.1] : [0.85, 0.86, 0.89],
+    markerColor: isDark ? [0.48, 0.58, 0.74] : [0.33, 0.36, 0.43],
+    // Keep glow the same as base so edges don't "halo" brighter than the page
+    glowColor: isDark ? [0.07, 0.08, 0.1] : [0.85, 0.86, 0.89],
     markers: [
       { location: [14.5995, 120.9842], size: 0.03 },
       { location: [19.076, 72.8777], size: 0.1 },
@@ -161,7 +163,12 @@ export function Globe({
       
       <canvas
         ref={canvasRef}
-        className="h-full w-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]"
+        className={cn(
+          "h-full w-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]",
+          // In light mode, gently blend the globe into the background (reduces the stark white look)
+          !isDark && "mix-blend-multiply opacity-80",
+          isDark && "opacity-90"
+        )}
         onPointerDown={(e) =>
           updatePointerInteraction(
             e.clientX - pointerInteractionMovement.current
