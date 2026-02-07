@@ -97,17 +97,17 @@ export function FeaturesSection() {
               variants={itemVariants}
               className="group relative"
             >
-              <div className="h-full p-6 rounded-2xl neu-raised hover:neu-lg transition-all duration-300">
+              <div className="h-full p-6 rounded-2xl bg-background border border-border hover:shadow-lg transition-all duration-300">
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-xl neu-inset flex items-center justify-center mb-4 group-hover:neu-pressed transition-all">
-                  <feature.icon className="w-7 h-7 text-foreground/70" />
+                <div className="w-14 h-14 rounded-xl bg-foreground/10 border border-border flex items-center justify-center mb-4">
+                  <feature.icon className="w-7 h-7 text-foreground" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-display font-semibold mb-2 text-foreground group-hover:text-foreground/80 transition-colors">
+                <h3 className="text-xl font-display font-semibold mb-2 text-foreground">
                   {feature.title}
                 </h3>
-                <p className="text-muted-foreground leading-relaxed">
+                <p className="text-foreground/70 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
