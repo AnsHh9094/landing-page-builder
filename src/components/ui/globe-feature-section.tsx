@@ -64,15 +64,15 @@ export function Globe({
     phi: 0,
     theta: 0.3,
     dark: isDark ? 1 : 0,
-    diffuse: isDark ? 1.1 : 0.45,
+    // Keep light mode very subtle so it doesn't read as a "white sticker"
+    diffuse: isDark ? 1.1 : 0.25,
     mapSamples: 16000,
-    // Lower brightness in light mode to avoid a "white sticker" look
-    mapBrightness: isDark ? 5.5 : 0.85,
+    mapBrightness: isDark ? 5.5 : 0.65,
     // Match background: light mode ~hsl(225, 25%, 92%) / dark mode ~hsl(220, 20%, 10%)
-    baseColor: isDark ? [0.07, 0.08, 0.1] : [0.85, 0.86, 0.89],
-    markerColor: isDark ? [0.48, 0.58, 0.74] : [0.33, 0.36, 0.43],
+    baseColor: isDark ? [0.07, 0.08, 0.1] : [0.84, 0.85, 0.88],
+    markerColor: isDark ? [0.48, 0.58, 0.74] : [0.3, 0.33, 0.4],
     // Keep glow the same as base so edges don't "halo" brighter than the page
-    glowColor: isDark ? [0.07, 0.08, 0.1] : [0.85, 0.86, 0.89],
+    glowColor: isDark ? [0.07, 0.08, 0.1] : [0.84, 0.85, 0.88],
     markers: [
       { location: [14.5995, 120.9842], size: 0.03 },
       { location: [19.076, 72.8777], size: 0.1 },
@@ -153,20 +153,20 @@ export function Globe({
   return (
     <div
       className={cn(
-        "relative flex items-center justify-center overflow-hidden rounded-2xl bg-background",
+        "relative flex items-center justify-center overflow-hidden rounded-2xl bg-transparent",
         className
       )}
     >
-      {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 pointer-events-none z-10 rounded-2xl bg-gradient-to-br from-foreground/5 via-transparent to-foreground/5" />
-      <div className="absolute inset-0 pointer-events-none z-10 rounded-2xl bg-gradient-to-t from-background/20 via-transparent to-transparent" />
       
       <canvas
         ref={canvasRef}
         className={cn(
           "h-full w-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]",
-          // In light mode, gently blend the globe into the background (reduces the stark white look)
-          !isDark && "mix-blend-multiply opacity-80",
+          // Feather the edges so it visually melts into the background
+          "[mask-image:radial-gradient(circle_at_center,#000_62%,transparent_78%)]",
+          "[-webkit-mask-image:radial-gradient(circle_at_center,#000_62%,transparent_78%)]",
+          // In light mode, gently blend the globe into the background
+          !isDark && "mix-blend-multiply opacity-75",
           isDark && "opacity-90"
         )}
         onPointerDown={(e) =>
