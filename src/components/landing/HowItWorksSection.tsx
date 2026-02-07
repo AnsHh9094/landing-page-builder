@@ -7,30 +7,24 @@ const steps = [
     icon: Cloud,
     title: "Deploy to Your VPS",
     description: "One-click deployment to any VPS. Your server, your data, your rules.",
-    color: "primary",
   },
   {
     number: "02",
     icon: MonitorSmartphone,
     title: "Add Your Devices",
     description: "Use the dashboard to add devices. Windows, Android, Linux - all supported.",
-    color: "accent",
   },
   {
     number: "03",
     icon: Globe,
     title: "Connect Securely",
     description: "Your private mesh network is ready. Connect from anywhere, securely.",
-    color: "primary",
   },
 ];
 
 export function HowItWorksSection() {
   return (
     <section className="py-24 px-4 relative overflow-hidden" id="how-it-works">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-transparent to-accent/5" />
-      
       <div className="container max-w-6xl mx-auto relative z-10">
         {/* Section header */}
         <motion.div
@@ -40,9 +34,9 @@ export function HowItWorksSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-foreground">
             Up and Running in
-            <span className="gradient-text"> 3 Simple Steps</span>
+            <span className="text-foreground/70"> 3 Simple Steps</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             No complex configurations. No networking expertise required.
@@ -52,7 +46,7 @@ export function HowItWorksSection() {
         {/* Steps */}
         <div className="relative">
           {/* Connection line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-primary via-accent to-primary opacity-30 transform -translate-y-1/2" />
+          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-border transform -translate-y-1/2" />
           
           <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
             {steps.map((step, index) => (
@@ -65,19 +59,19 @@ export function HowItWorksSection() {
                 className="relative"
               >
                 {/* Step card */}
-                <div className="relative p-8 rounded-2xl glass hover:bg-card/90 transition-all duration-300 group">
+                <div className="relative p-8 rounded-2xl neu-raised hover:neu-lg transition-all duration-300 group">
                   {/* Step number */}
-                  <div className="absolute -top-4 left-8 px-3 py-1 rounded-full bg-gradient-to-r from-primary to-accent text-sm font-bold text-primary-foreground">
+                  <div className="absolute -top-4 left-8 px-4 py-1.5 rounded-full neu-raised bg-foreground text-background text-sm font-bold">
                     {step.number}
                   </div>
 
                   {/* Icon */}
-                  <div className={`w-16 h-16 rounded-2xl bg-${step.color}/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                    <step.icon className={`w-8 h-8 text-${step.color}`} />
+                  <div className="w-16 h-16 rounded-2xl neu-inset flex items-center justify-center mb-6 group-hover:neu-pressed transition-all">
+                    <step.icon className="w-8 h-8 text-foreground/70" />
                   </div>
 
                   {/* Content */}
-                  <h3 className="text-xl font-display font-semibold mb-3">
+                  <h3 className="text-xl font-display font-semibold mb-3 text-foreground">
                     {step.title}
                   </h3>
                   <p className="text-muted-foreground">
@@ -88,7 +82,9 @@ export function HowItWorksSection() {
                 {/* Arrow connector (hidden on last item) */}
                 {index < steps.length - 1 && (
                   <div className="hidden md:flex absolute top-1/2 -right-6 lg:-right-8 transform -translate-y-1/2 z-10">
-                    <ArrowRight className="w-6 h-6 text-primary/50" />
+                    <div className="w-8 h-8 rounded-full neu-sm flex items-center justify-center bg-background">
+                      <ArrowRight className="w-4 h-4 text-muted-foreground" />
+                    </div>
                   </div>
                 )}
               </motion.div>

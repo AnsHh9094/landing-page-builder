@@ -31,9 +31,6 @@ const stats = [
 export function TestimonialsSection() {
   return (
     <section className="py-24 px-4 relative overflow-hidden" id="testimonials">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-accent/5 to-transparent" />
-      
       <div className="container max-w-7xl mx-auto relative z-10">
         {/* Stats bar */}
         <motion.div
@@ -49,10 +46,12 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="text-center p-4 md:p-6 rounded-2xl glass"
+              className="text-center p-4 md:p-6 rounded-2xl neu-raised"
             >
-              <stat.icon className="w-6 h-6 md:w-8 md:h-8 text-accent mx-auto mb-2" />
-              <div className="text-2xl md:text-4xl font-display font-bold gradient-text mb-1">
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full neu-inset flex items-center justify-center mx-auto mb-3">
+                <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-foreground/70" />
+              </div>
+              <div className="text-2xl md:text-4xl font-display font-bold text-foreground mb-1">
                 {stat.value}
               </div>
               <div className="text-xs md:text-sm text-muted-foreground">
@@ -70,9 +69,9 @@ export function TestimonialsSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-foreground">
             Trusted by
-            <span className="gradient-text"> Security-Minded</span> Professionals
+            <span className="text-foreground/70"> Security-Minded</span> Professionals
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Join thousands who've taken control of their network privacy.
@@ -90,29 +89,31 @@ export function TestimonialsSection() {
               transition={{ duration: 0.6, delay: index * 0.15 }}
               className="relative"
             >
-              <div className="h-full p-6 rounded-2xl glass hover:bg-card/90 transition-all duration-300 group">
+              <div className="h-full p-6 rounded-2xl neu-raised hover:neu-lg transition-all duration-300 group">
                 {/* Quote icon */}
-                <Quote className="w-8 h-8 text-primary/30 mb-4" />
+                <div className="w-10 h-10 rounded-full neu-inset flex items-center justify-center mb-4">
+                  <Quote className="w-5 h-5 text-foreground/50" />
+                </div>
                 
                 {/* Stars */}
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-accent text-accent" />
+                    <Star key={i} className="w-4 h-4 fill-foreground/30 text-foreground/30" />
                   ))}
                 </div>
 
                 {/* Quote text */}
-                <p className="text-foreground/90 mb-6 leading-relaxed">
+                <p className="text-foreground/80 mb-6 leading-relaxed">
                   "{testimonial.quote}"
                 </p>
 
                 {/* Author */}
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center text-sm font-bold text-primary-foreground">
+                  <div className="w-10 h-10 rounded-full neu-raised flex items-center justify-center text-sm font-bold text-foreground/70">
                     {testimonial.avatar}
                   </div>
                   <div>
-                    <div className="font-semibold">{testimonial.author}</div>
+                    <div className="font-semibold text-foreground">{testimonial.author}</div>
                     <div className="text-sm text-muted-foreground">{testimonial.role}</div>
                   </div>
                 </div>

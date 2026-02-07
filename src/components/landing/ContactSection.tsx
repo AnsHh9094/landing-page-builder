@@ -79,9 +79,6 @@ export function ContactSection() {
 
   return (
     <section className="py-24 px-4 relative overflow-hidden" id="contact">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-t from-primary/10 via-transparent to-transparent" />
-
       <div className="container max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -90,8 +87,8 @@ export function ContactSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-12"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4">
-            Get In <span className="gradient-text">Touch</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-foreground">
+            Get In <span className="text-foreground/70">Touch</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-xl mx-auto">
             Have questions? Want to learn more? We'd love to hear from you.
@@ -106,12 +103,12 @@ export function ContactSection() {
         >
           <form
             onSubmit={handleSubmit}
-            className="p-8 rounded-3xl glass max-w-2xl mx-auto"
+            className="p-8 rounded-3xl neu-raised max-w-2xl mx-auto"
           >
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               {/* Name field */}
               <div className="space-y-2">
-                <Label htmlFor="name" className="flex items-center gap-2">
+                <Label htmlFor="name" className="flex items-center gap-2 text-foreground">
                   <User className="w-4 h-4 text-muted-foreground" />
                   Name
                 </Label>
@@ -121,7 +118,7 @@ export function ContactSection() {
                   placeholder="Your name"
                   value={formData.name}
                   onChange={(e) => handleChange("name", e.target.value)}
-                  className={`bg-secondary/50 border-border/50 focus:border-primary ${errors.name ? "border-destructive" : ""}`}
+                  className={`neu-inset border-0 bg-background focus:ring-2 focus:ring-foreground/20 ${errors.name ? "ring-2 ring-destructive" : ""}`}
                   disabled={isLoading}
                 />
                 {errors.name && (
@@ -131,7 +128,7 @@ export function ContactSection() {
 
               {/* Email field */}
               <div className="space-y-2">
-                <Label htmlFor="email" className="flex items-center gap-2">
+                <Label htmlFor="email" className="flex items-center gap-2 text-foreground">
                   <Mail className="w-4 h-4 text-muted-foreground" />
                   Email
                 </Label>
@@ -141,7 +138,7 @@ export function ContactSection() {
                   placeholder="your@email.com"
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
-                  className={`bg-secondary/50 border-border/50 focus:border-primary ${errors.email ? "border-destructive" : ""}`}
+                  className={`neu-inset border-0 bg-background focus:ring-2 focus:ring-foreground/20 ${errors.email ? "ring-2 ring-destructive" : ""}`}
                   disabled={isLoading}
                 />
                 {errors.email && (
@@ -152,7 +149,7 @@ export function ContactSection() {
 
             {/* Message field */}
             <div className="space-y-2 mb-6">
-              <Label htmlFor="message" className="flex items-center gap-2">
+              <Label htmlFor="message" className="flex items-center gap-2 text-foreground">
                 <MessageSquare className="w-4 h-4 text-muted-foreground" />
                 Message
               </Label>
@@ -161,7 +158,7 @@ export function ContactSection() {
                 placeholder="Tell us what you're thinking..."
                 value={formData.message}
                 onChange={(e) => handleChange("message", e.target.value)}
-                className={`min-h-[150px] bg-secondary/50 border-border/50 focus:border-primary resize-none ${errors.message ? "border-destructive" : ""}`}
+                className={`min-h-[150px] neu-inset border-0 bg-background focus:ring-2 focus:ring-foreground/20 resize-none ${errors.message ? "ring-2 ring-destructive" : ""}`}
                 disabled={isLoading}
               />
               {errors.message && (
@@ -172,7 +169,7 @@ export function ContactSection() {
             <Button
               type="submit"
               size="lg"
-              className="w-full h-12 gradient-bg hover:opacity-90 transition-opacity glow-sm"
+              className="w-full h-12 neu-raised bg-foreground text-background hover:bg-foreground/90 border-0"
               disabled={isLoading}
             >
               {isLoading ? (
