@@ -87,11 +87,11 @@ export function HeroSection() {
             Global <span className="text-foreground/70">Mesh Network</span>
           </h1>
 
-          <p className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto mb-10">
+          <p className="text-foreground/70 text-lg md:text-xl max-w-xl mx-auto mb-10">
             Connect all your devices securely through your VPS. Zero config, works everywhere.
           </p>
 
-          {/* Waitlist form - Neumorphic */}
+          {/* Waitlist form */}
           <motion.form
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -104,35 +104,35 @@ export function HeroSection() {
               placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-12 neu-inset border-0 bg-background focus:ring-2 focus:ring-foreground/20"
+              className="h-12 bg-muted border-border focus:ring-2 focus:ring-foreground/20"
               disabled={isLoading}
             />
             <Button 
               type="submit" 
               size="lg" 
-              className="h-12 px-8 neu-raised bg-foreground text-background hover:bg-foreground/90 border-0" 
+              className="h-12 px-8 bg-foreground text-background hover:bg-foreground/90 border-0" 
               disabled={isLoading}
             >
               {isLoading ? "..." : "Join Waitlist"}
             </Button>
           </motion.form>
 
-          {/* Trust indicators - Neumorphic pills */}
+          {/* Trust indicators */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
             className="flex flex-wrap items-center justify-center gap-4"
           >
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full neu-sm bg-background text-muted-foreground">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border text-foreground">
               <Wifi className="w-4 h-4" />
               <span className="text-sm">Works behind NAT</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full neu-sm bg-background text-muted-foreground">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border text-foreground">
               <Shield className="w-4 h-4" />
               <span className="text-sm">Encrypted</span>
             </div>
-            <div className="flex items-center gap-2 px-4 py-2 rounded-full neu-sm bg-background text-muted-foreground">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-background border border-border text-foreground">
               <Zap className="w-4 h-4" />
               <span className="text-sm">Zero-config</span>
             </div>
@@ -149,9 +149,9 @@ export function HeroSection() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-10 h-10 rounded-full neu-raised flex items-center justify-center"
+            className="w-10 h-10 rounded-full bg-background border border-border flex items-center justify-center"
           >
-            <ArrowDown className="w-4 h-4 text-muted-foreground" />
+            <ArrowDown className="w-4 h-4 text-foreground" />
           </motion.div>
         </motion.div>
       </div>
