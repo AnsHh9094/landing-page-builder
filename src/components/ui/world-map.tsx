@@ -63,12 +63,13 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
                 d={createCurvedPath(startPoint, endPoint)}
                 fill="none"
                 stroke="url(#path-gradient)"
-                strokeWidth="1"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
+                strokeWidth="2"
+                strokeOpacity="0.9"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: 1 }}
                 transition={{
-                  duration: 1,
-                  delay: 0.5 * i,
+                  duration: 1.2,
+                  delay: 0.4 * i,
                   ease: "easeOut",
                 }}
               />
@@ -97,20 +98,20 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
                 <circle
                   cx={startPoint.x}
                   cy={startPoint.y}
-                  r="2"
+                  r="3"
                   fill={lineColor}
                 />
                 <circle
                   cx={startPoint.x}
                   cy={startPoint.y}
-                  r="2"
+                  r="3"
                   fill={lineColor}
-                  opacity="0.5"
+                  opacity="0.6"
                 >
                   <animate
                     attributeName="r"
-                    from="2"
-                    to="8"
+                    from="3"
+                    to="12"
                     dur="1.5s"
                     begin="0s"
                     repeatCount="indefinite"
@@ -131,20 +132,20 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
                 <circle
                   cx={endPoint.x}
                   cy={endPoint.y}
-                  r="2"
+                  r="3"
                   fill={lineColor}
                 />
                 <circle
                   cx={endPoint.x}
                   cy={endPoint.y}
-                  r="2"
+                  r="3"
                   fill={lineColor}
-                  opacity="0.5"
+                  opacity="0.6"
                 >
                   <animate
                     attributeName="r"
-                    from="2"
-                    to="8"
+                    from="3"
+                    to="12"
                     dur="1.5s"
                     begin="0s"
                     repeatCount="indefinite"
