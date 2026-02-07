@@ -6,52 +6,52 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 20% 20%;
+    --background: 225 25% 92%;
+    --foreground: 220 20% 15%;
 
-    --card: 220 20% 95%;
-    --card-foreground: 220 20% 20%;
+    --card: 225 25% 90%;
+    --card-foreground: 220 20% 15%;
 
-    --popover: 220 20% 97%;
-    --popover-foreground: 220 20% 20%;
+    --popover: 225 25% 92%;
+    --popover-foreground: 220 20% 15%;
 
-    --primary: 220 15% 30%;
-    --primary-foreground: 220 20% 97%;
+    --primary: 220 15% 25%;
+    --primary-foreground: 225 25% 95%;
 
-    --secondary: 220 15% 92%;
-    --secondary-foreground: 220 20% 30%;
+    --secondary: 225 20% 88%;
+    --secondary-foreground: 220 20% 20%;
 
-    --muted: 220 15% 90%;
-    --muted-foreground: 220 10% 50%;
+    --muted: 225 15% 85%;
+    --muted-foreground: 220 10% 45%;
 
-    --accent: 220 15% 85%;
-    --accent-foreground: 220 20% 25%;
+    --accent: 225 15% 82%;
+    --accent-foreground: 220 20% 20%;
 
     --destructive: 0 70% 55%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 220 15% 88%;
-    --input: 220 15% 92%;
-    --ring: 220 15% 40%;
+    --border: 225 15% 82%;
+    --input: 225 20% 88%;
+    --ring: 220 15% 35%;
 
     --radius: 1rem;
 
     /* Neumorphic Theme Colors */
-    --neu-light: 220 20% 100%;
-    --neu-dark: 220 15% 85%;
-    --surface: 220 20% 95%;
-    --surface-elevated: 220 20% 97%;
+    --neu-light: 0 0% 100%;
+    --neu-dark: 225 20% 80%;
+    --surface: 225 25% 90%;
+    --surface-elevated: 225 25% 92%;
 
-    /* Neumorphic Shadows */
-    --shadow-neu-sm: 4px 4px 8px hsl(220 15% 85%), -4px -4px 8px hsl(0 0% 100%);
-    --shadow-neu-md: 8px 8px 16px hsl(220 15% 85%), -8px -8px 16px hsl(0 0% 100%);
-    --shadow-neu-lg: 12px 12px 24px hsl(220 15% 85%), -12px -12px 24px hsl(0 0% 100%);
-    --shadow-neu-inset: inset 4px 4px 8px hsl(220 15% 85%), inset -4px -4px 8px hsl(0 0% 100%);
-    --shadow-neu-pressed: inset 2px 2px 4px hsl(220 15% 85%), inset -2px -2px 4px hsl(0 0% 100%);
+    /* Neumorphic Shadows - More pronounced */
+    --shadow-neu-sm: 6px 6px 12px hsl(225 20% 78%), -6px -6px 12px hsl(0 0% 100%);
+    --shadow-neu-md: 10px 10px 20px hsl(225 20% 78%), -10px -10px 20px hsl(0 0% 100%);
+    --shadow-neu-lg: 15px 15px 30px hsl(225 20% 78%), -15px -15px 30px hsl(0 0% 100%);
+    --shadow-neu-inset: inset 6px 6px 12px hsl(225 20% 78%), inset -6px -6px 12px hsl(0 0% 100%);
+    --shadow-neu-pressed: inset 3px 3px 6px hsl(225 20% 78%), inset -3px -3px 6px hsl(0 0% 100%);
 
     /* Gradients - Subtle for neumorphic */
-    --gradient-primary: linear-gradient(145deg, hsl(220 20% 98%), hsl(220 15% 92%));
-    --gradient-accent: linear-gradient(145deg, hsl(220 15% 92%), hsl(220 15% 88%));
+    --gradient-primary: linear-gradient(145deg, hsl(225 25% 95%), hsl(225 20% 88%));
+    --gradient-accent: linear-gradient(145deg, hsl(225 20% 88%), hsl(225 15% 82%));
     
     --sidebar-background: 220 20% 95%;
     --sidebar-foreground: 220 20% 20%;
