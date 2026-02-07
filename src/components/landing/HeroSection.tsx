@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Shield, Wifi, Zap } from "lucide-react";
+import { Shield, Wifi, Zap, ArrowDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
@@ -24,27 +24,19 @@ export function HeroSection() {
     e.preventDefault();
     
     if (!email || !email.includes("@")) {
-      toast({
-        title: "Invalid email",
-        description: "Please enter a valid email address.",
-        variant: "destructive",
-      });
+      toast({ title: "Invalid email", description: "Please enter a valid email address.", variant: "destructive" });
       return;
     }
 
     setIsLoading(true);
     
     try {
-      const { error } = await supabase
-        .from("waitlist")
-        .insert({ email: email.trim().toLowerCase() });
+      const { error } = await supabase.from("waitlist").insert({ email: email.trim().toLowerCase() });
 
       if (error) {
         if (error.code === "23505") {
           toast({ title: "Already on the list!", description: "This email is already registered." });
-        } else {
-          throw error;
-        }
+        } else throw error;
       } else {
         toast({ title: "You're on the list! 🎉", description: "We'll notify you when we launch." });
         setEmail("");
@@ -58,118 +50,105 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden pt-16">
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background/40 z-10" />
-      <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary/30 rounded-full blur-3xl" />
-      <div className="absolute bottom-20 right-1/4 w-96 h-96 bg-accent/20 rounded-full blur-3xl" />
+    <section className="relative min-h-screen overflow-hidden">
+      {/* Ambient glow */}
+      <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-primary/20 rounded-full blur-[120px]" />
       
-      {/* World Map as full background */}
-      <div className="absolute inset-0 flex items-center justify-center">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1.2 }}
-          className="w-full h-full flex items-center justify-center"
-        >
-          <div className="w-full max-w-[1800px] translate-y-[15%]">
-            <WorldMap dots={connectionDots} lineColor="hsl(262, 83%, 58%)" />
-          </div>
-        </motion.div>
-      </div>
-
-      {/* Hero Content - Overlaid */}
-      <div className="relative z-20 container max-w-4xl mx-auto px-4 pt-20 pb-32">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center"
-        >
-          {/* Badge */}
+      {/* Content Container */}
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* Top: Hero Text */}
+        <div className="pt-24 pb-8 px-4 text-center">
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4"
           >
             <Shield className="w-4 h-4 text-accent" />
             <span className="text-sm font-medium text-muted-foreground">Powered by WireGuard®</span>
           </motion.div>
 
-          {/* Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-4">
-            Your Private
-            <span className="block gradient-text">Mesh Network</span>
-            Made Simple
-          </h1>
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-4xl md:text-5xl lg:text-6xl font-display font-bold leading-tight mb-3"
+          >
+            Global <span className="gradient-text">Mesh Network</span>
+          </motion.h1>
 
-          {/* Subheadline with animated text */}
           <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="text-lg md:text-xl text-muted-foreground mb-2"
+            transition={{ delay: 0.2 }}
+            className="text-muted-foreground text-base md:text-lg max-w-lg mx-auto mb-6"
           >
-            Global{" "}
-            <span className="gradient-text font-semibold">
-              {"Connectivity".split("").map((letter, idx) => (
-                <motion.span
-                  key={idx}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.3, delay: 0.6 + idx * 0.03 }}
-                >
-                  {letter}
-                </motion.span>
-              ))}
-            </span>
-            {" "}— Connect securely from anywhere.
+            Connect all your devices securely through your VPS. Zero config, works everywhere.
           </motion.p>
 
-          <p className="text-base md:text-lg text-muted-foreground/80 mb-8 max-w-xl mx-auto">
-            Zero config, cross-platform, works behind any firewall.
-          </p>
-
           {/* Waitlist form */}
-          <form onSubmit={handleWaitlistSubmit} className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8">
+          <motion.form
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            onSubmit={handleWaitlistSubmit}
+            className="flex flex-col sm:flex-row gap-2 max-w-sm mx-auto"
+          >
             <Input
               type="email"
-              placeholder="Enter your email"
+              placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-12 bg-background/80 backdrop-blur border-border/50 focus:border-primary"
+              className="h-11 bg-background/60 backdrop-blur border-border/50"
               disabled={isLoading}
             />
-            <Button 
-              type="submit" 
-              size="lg" 
-              className="h-12 px-8 gradient-bg hover:opacity-90 transition-opacity glow-sm"
-              disabled={isLoading}
-            >
-              {isLoading ? "Joining..." : "Get Early Access"}
+            <Button type="submit" className="h-11 px-6 gradient-bg glow-sm" disabled={isLoading}>
+              {isLoading ? "..." : "Join Waitlist"}
             </Button>
-          </form>
+          </motion.form>
+        </div>
 
-          {/* Trust indicators */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-            className="flex flex-wrap items-center gap-4 md:gap-6 justify-center text-sm"
-          >
-            <div className="flex items-center gap-2 text-muted-foreground">
+        {/* Center: World Map */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          className="flex-1 flex items-center justify-center px-4 -mt-4"
+        >
+          <div className="w-full max-w-5xl">
+            <WorldMap dots={connectionDots} lineColor="hsl(262, 83%, 58%)" />
+          </div>
+        </motion.div>
+
+        {/* Bottom: Trust indicators */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.8 }}
+          className="pb-8 px-4"
+        >
+          <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-muted-foreground">
+            <div className="flex items-center gap-2">
               <Wifi className="w-4 h-4 text-accent" />
               <span>Works behind NAT</span>
             </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="flex items-center gap-2">
               <Shield className="w-4 h-4 text-primary" />
               <span>Military-grade encryption</span>
             </div>
-            <div className="flex items-center gap-2 text-muted-foreground">
+            <div className="flex items-center gap-2">
               <Zap className="w-4 h-4 text-accent" />
               <span>Zero-config setup</span>
             </div>
+          </div>
+          
+          {/* Scroll indicator */}
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity }}
+            className="flex justify-center mt-6"
+          >
+            <ArrowDown className="w-5 h-5 text-muted-foreground/50" />
           </motion.div>
         </motion.div>
       </div>
