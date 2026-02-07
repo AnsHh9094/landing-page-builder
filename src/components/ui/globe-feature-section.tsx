@@ -51,7 +51,7 @@ export function Globe({
     setMounted(true);
   }, []);
 
-  // Fixed globe configuration - consistent colors regardless of theme
+  // Fixed globe configuration - consistent light gray colors
   const config: COBEOptions = {
     width: 800,
     height: 800,
@@ -60,13 +60,13 @@ export function Globe({
     phi: 0,
     theta: 0.3,
     dark: 0,
-    diffuse: 0.4,
+    diffuse: 0.6,
     mapSamples: 16000,
-    mapBrightness: 1.2,
-    // Soft gray colors that work on both light and dark backgrounds
-    baseColor: [0.88, 0.89, 0.92],
-    markerColor: [0.35, 0.38, 0.45],
-    glowColor: [0.88, 0.89, 0.92],
+    mapBrightness: 2,
+    // Light gray colors - visible on both light and dark backgrounds
+    baseColor: [0.92, 0.93, 0.95],
+    markerColor: [0.5, 0.55, 0.65],
+    glowColor: [0.85, 0.87, 0.9],
     markers: [
       { location: [14.5995, 120.9842], size: 0.03 },
       { location: [19.076, 72.8777], size: 0.1 },
@@ -157,10 +157,8 @@ export function Globe({
         className={cn(
           "h-full w-full opacity-0 transition-opacity duration-500 [contain:layout_paint_size]",
           // Feather the edges so it visually melts into the background
-          "[mask-image:radial-gradient(circle_at_center,#000_62%,transparent_78%)]",
-          "[-webkit-mask-image:radial-gradient(circle_at_center,#000_62%,transparent_78%)]",
-          // Consistent blend for both themes
-          "mix-blend-multiply opacity-80"
+          "[mask-image:radial-gradient(circle_at_center,#000_65%,transparent_80%)]",
+          "[-webkit-mask-image:radial-gradient(circle_at_center,#000_65%,transparent_80%)]"
         )}
         onPointerDown={(e) =>
           updatePointerInteraction(
