@@ -24,7 +24,7 @@ export function Navbar() {
               <div className="w-9 h-9 rounded-xl bg-foreground/10 border border-border flex items-center justify-center">
                 <Shield className="w-5 h-5 text-foreground" />
               </div>
-              <span className="text-lg font-display font-bold text-foreground">VPN Panel</span>
+              <span className="text-lg font-display font-bold text-foreground">WhaleScale</span>
             </a>
 
             {/* Desktop nav */}
