@@ -63,8 +63,8 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
                 d={createCurvedPath(startPoint, endPoint)}
                 fill="none"
                 stroke="url(#path-gradient)"
-                strokeWidth="2"
-                strokeOpacity="0.9"
+                strokeWidth="2.5"
+                strokeOpacity="1"
                 initial={{ pathLength: 0, opacity: 0 }}
                 animate={{ pathLength: 1, opacity: 1 }}
                 transition={{
@@ -80,10 +80,10 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
         {/* Gradient definition */}
         <defs>
           <linearGradient id="path-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="white" stopOpacity="0" />
-            <stop offset="5%" stopColor={lineColor} stopOpacity="1" />
-            <stop offset="95%" stopColor={lineColor} stopOpacity="1" />
-            <stop offset="100%" stopColor="white" stopOpacity="0" />
+            <stop offset="0%" stopColor={lineColor} stopOpacity="0.2" />
+            <stop offset="15%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="85%" stopColor={lineColor} stopOpacity="1" />
+            <stop offset="100%" stopColor={lineColor} stopOpacity="0.2" />
           </linearGradient>
         </defs>
 
@@ -98,20 +98,20 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
                 <circle
                   cx={startPoint.x}
                   cy={startPoint.y}
-                  r="3"
+                  r="4"
                   fill={lineColor}
                 />
                 <circle
                   cx={startPoint.x}
                   cy={startPoint.y}
-                  r="3"
+                  r="4"
                   fill={lineColor}
-                  opacity="0.6"
+                  opacity="0.7"
                 >
                   <animate
                     attributeName="r"
-                    from="3"
-                    to="12"
+                    from="4"
+                    to="16"
                     dur="1.5s"
                     begin="0s"
                     repeatCount="indefinite"
@@ -132,20 +132,20 @@ export function WorldMap({ dots = [], lineColor = "#0ea5e9" }: MapProps) {
                 <circle
                   cx={endPoint.x}
                   cy={endPoint.y}
-                  r="3"
+                  r="4"
                   fill={lineColor}
                 />
                 <circle
                   cx={endPoint.x}
                   cy={endPoint.y}
-                  r="3"
+                  r="4"
                   fill={lineColor}
-                  opacity="0.6"
+                  opacity="0.7"
                 >
                   <animate
                     attributeName="r"
-                    from="3"
-                    to="12"
+                    from="4"
+                    to="16"
                     dur="1.5s"
                     begin="0s"
                     repeatCount="indefinite"
