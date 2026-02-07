@@ -60,13 +60,13 @@ export function Globe({
     phi: 0,
     theta: 0.3,
     dark: 0,
-    diffuse: 0.5,
+    diffuse: 0.4,
     mapSamples: 16000,
-    mapBrightness: 1.4,
-    // Slightly darker gray tones
-    baseColor: [0.82, 0.84, 0.88],
-    markerColor: [0.45, 0.5, 0.6],
-    glowColor: [0.75, 0.78, 0.82],
+    mapBrightness: 1.0,
+    // Darker gray tones
+    baseColor: [0.7, 0.72, 0.76],
+    markerColor: [0.4, 0.45, 0.55],
+    glowColor: [0.6, 0.63, 0.68],
     markers: [
       { location: [14.5995, 120.9842], size: 0.03 },
       { location: [19.076, 72.8777], size: 0.1 },
