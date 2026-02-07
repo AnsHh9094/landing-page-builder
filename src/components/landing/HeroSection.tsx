@@ -59,7 +59,7 @@ export function HeroSection() {
           transition={{ duration: 1.2 }}
           className="w-full max-w-[2000px] px-4"
         >
-          <WorldMap dots={connectionDots} lineColor="hsl(200, 60%, 55%)" />
+          <WorldMap dots={connectionDots} lineColor="hsl(220, 15%, 45%)" />
         </motion.div>
       </div>
 
