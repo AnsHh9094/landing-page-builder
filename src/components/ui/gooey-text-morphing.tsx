@@ -20,6 +20,7 @@ export function GooeyText({
 }: GooeyTextProps) {
   const text1Ref = React.useRef<HTMLSpanElement>(null);
   const text2Ref = React.useRef<HTMLSpanElement>(null);
+  const filterId = React.useId().replace(/:/g, "");
 
   React.useEffect(() => {
     let textIndex = texts.length - 1;
@@ -96,7 +97,7 @@ export function GooeyText({
     <div className={cn("relative inline-block", className)}>
       <svg className="absolute w-0 h-0">
         <defs>
-          <filter id="gooey-text-threshold">
+          <filter id={`gooey-text-${filterId}`}>
             <feColorMatrix
               in="SourceGraphic"
               type="matrix"
@@ -111,7 +112,7 @@ export function GooeyText({
 
       <div
         className="relative"
-        style={{ filter: "url(#gooey-text-threshold)" }}
+        style={{ filter: `url(#gooey-text-${filterId})` }}
       >
         <span
           ref={text1Ref}
