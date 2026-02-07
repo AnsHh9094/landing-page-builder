@@ -90,7 +90,7 @@ export function ContactSection() {
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-foreground">
             Get In <span className="text-foreground/70">Touch</span>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-xl mx-auto">
             Have questions? Want to learn more? We'd love to hear from you.
           </p>
         </motion.div>
@@ -103,13 +103,13 @@ export function ContactSection() {
         >
           <form
             onSubmit={handleSubmit}
-            className="p-8 rounded-3xl neu-raised max-w-2xl mx-auto"
+            className="p-8 rounded-3xl bg-background border border-border max-w-2xl mx-auto"
           >
             <div className="grid md:grid-cols-2 gap-6 mb-6">
               {/* Name field */}
               <div className="space-y-2">
                 <Label htmlFor="name" className="flex items-center gap-2 text-foreground">
-                  <User className="w-4 h-4 text-muted-foreground" />
+                  <User className="w-4 h-4 text-foreground/70" />
                   Name
                 </Label>
                 <Input
@@ -118,7 +118,7 @@ export function ContactSection() {
                   placeholder="Your name"
                   value={formData.name}
                   onChange={(e) => handleChange("name", e.target.value)}
-                  className={`neu-inset border-0 bg-background focus:ring-2 focus:ring-foreground/20 ${errors.name ? "ring-2 ring-destructive" : ""}`}
+                  className={`bg-muted border-border focus:ring-2 focus:ring-foreground/20 ${errors.name ? "ring-2 ring-destructive" : ""}`}
                   disabled={isLoading}
                 />
                 {errors.name && (
@@ -129,7 +129,7 @@ export function ContactSection() {
               {/* Email field */}
               <div className="space-y-2">
                 <Label htmlFor="email" className="flex items-center gap-2 text-foreground">
-                  <Mail className="w-4 h-4 text-muted-foreground" />
+                  <Mail className="w-4 h-4 text-foreground/70" />
                   Email
                 </Label>
                 <Input
@@ -138,7 +138,7 @@ export function ContactSection() {
                   placeholder="your@email.com"
                   value={formData.email}
                   onChange={(e) => handleChange("email", e.target.value)}
-                  className={`neu-inset border-0 bg-background focus:ring-2 focus:ring-foreground/20 ${errors.email ? "ring-2 ring-destructive" : ""}`}
+                  className={`bg-muted border-border focus:ring-2 focus:ring-foreground/20 ${errors.email ? "ring-2 ring-destructive" : ""}`}
                   disabled={isLoading}
                 />
                 {errors.email && (
@@ -150,7 +150,7 @@ export function ContactSection() {
             {/* Message field */}
             <div className="space-y-2 mb-6">
               <Label htmlFor="message" className="flex items-center gap-2 text-foreground">
-                <MessageSquare className="w-4 h-4 text-muted-foreground" />
+                <MessageSquare className="w-4 h-4 text-foreground/70" />
                 Message
               </Label>
               <Textarea
@@ -158,7 +158,7 @@ export function ContactSection() {
                 placeholder="Tell us what you're thinking..."
                 value={formData.message}
                 onChange={(e) => handleChange("message", e.target.value)}
-                className={`min-h-[150px] neu-inset border-0 bg-background focus:ring-2 focus:ring-foreground/20 resize-none ${errors.message ? "ring-2 ring-destructive" : ""}`}
+                className={`min-h-[150px] bg-muted border-border focus:ring-2 focus:ring-foreground/20 resize-none ${errors.message ? "ring-2 ring-destructive" : ""}`}
                 disabled={isLoading}
               />
               {errors.message && (
@@ -169,7 +169,7 @@ export function ContactSection() {
             <Button
               type="submit"
               size="lg"
-              className="w-full h-12 neu-raised bg-foreground text-background hover:bg-foreground/90 border-0"
+              className="w-full h-12 bg-foreground text-background hover:bg-foreground/90 border-0"
               disabled={isLoading}
             >
               {isLoading ? (

@@ -83,12 +83,12 @@ export function Footer() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="p-8 md:p-12 rounded-3xl neu-raised mb-16 text-center"
+          className="p-8 md:p-12 rounded-3xl bg-background border border-border mb-16 text-center"
         >
           <h3 className="text-2xl md:text-3xl font-display font-bold mb-4 text-foreground">
             Ready to Take Control of Your <span className="text-foreground/70">Network Privacy</span>?
           </h3>
-          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+          <p className="text-foreground/70 mb-6 max-w-xl mx-auto">
             Join the waitlist and be the first to know when we launch.
           </p>
           <form
@@ -100,13 +100,13 @@ export function Footer() {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-12 neu-inset border-0 bg-background focus:ring-2 focus:ring-foreground/20"
+              className="h-12 bg-muted border-border focus:ring-2 focus:ring-foreground/20"
               disabled={isLoading}
             />
             <Button
               type="submit"
               size="lg"
-              className="h-12 px-6 neu-raised bg-foreground text-background hover:bg-foreground/90 border-0"
+              className="h-12 px-6 bg-foreground text-background hover:bg-foreground/90 border-0"
               disabled={isLoading}
             >
               {isLoading ? "..." : <><span>Join</span><ArrowRight className="w-4 h-4 ml-2" /></>}
@@ -119,32 +119,32 @@ export function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <div className="w-10 h-10 rounded-xl neu-raised flex items-center justify-center">
+              <div className="w-10 h-10 rounded-xl bg-foreground/10 border border-border flex items-center justify-center">
                 <Shield className="w-5 h-5 text-foreground" />
               </div>
               <span className="text-xl font-display font-bold text-foreground">VPN Panel</span>
             </div>
-            <p className="text-muted-foreground mb-6 max-w-sm">
+            <p className="text-foreground/70 mb-6 max-w-sm">
               Your self-hosted VPN control panel for creating private mesh networks. Simple, secure, and cross-platform.
             </p>
             <div className="flex gap-4">
               <a
                 href="#"
-                className="w-10 h-10 rounded-xl neu-raised flex items-center justify-center hover:neu-lg transition-all"
+                className="w-10 h-10 rounded-xl bg-foreground/10 border border-border flex items-center justify-center hover:bg-foreground/20 transition-all"
               >
-                <Github className="w-5 h-5 text-foreground/70" />
+                <Github className="w-5 h-5 text-foreground" />
               </a>
               <a
                 href="#"
-                className="w-10 h-10 rounded-xl neu-raised flex items-center justify-center hover:neu-lg transition-all"
+                className="w-10 h-10 rounded-xl bg-foreground/10 border border-border flex items-center justify-center hover:bg-foreground/20 transition-all"
               >
-                <Twitter className="w-5 h-5 text-foreground/70" />
+                <Twitter className="w-5 h-5 text-foreground" />
               </a>
               <a
                 href="#contact"
-                className="w-10 h-10 rounded-xl neu-raised flex items-center justify-center hover:neu-lg transition-all"
+                className="w-10 h-10 rounded-xl bg-foreground/10 border border-border flex items-center justify-center hover:bg-foreground/20 transition-all"
               >
-                <Mail className="w-5 h-5 text-foreground/70" />
+                <Mail className="w-5 h-5 text-foreground" />
               </a>
             </div>
           </div>
@@ -157,7 +157,7 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-foreground/70 hover:text-foreground transition-colors"
                   >
                     {link.label}
                   </a>
@@ -173,7 +173,7 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-foreground/70 hover:text-foreground transition-colors"
                   >
                     {link.label}
                   </a>
@@ -189,7 +189,7 @@ export function Footer() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
+                    className="text-foreground/70 hover:text-foreground transition-colors"
                   >
                     {link.label}
                   </a>
@@ -201,10 +201,10 @@ export function Footer() {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-foreground/70">
             © 2024 VPN Panel. All rights reserved.
           </p>
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-foreground/70">
             Powered by WireGuard® — the most secure VPN protocol.
           </p>
         </div>

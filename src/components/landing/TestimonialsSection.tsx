@@ -46,15 +46,15 @@ export function TestimonialsSection() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              className="text-center p-4 md:p-6 rounded-2xl neu-raised"
+              className="text-center p-4 md:p-6 rounded-2xl bg-background border border-border"
             >
-              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full neu-inset flex items-center justify-center mx-auto mb-3">
-                <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-foreground/70" />
+              <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-foreground/10 border border-border flex items-center justify-center mx-auto mb-3">
+                <stat.icon className="w-5 h-5 md:w-6 md:h-6 text-foreground" />
               </div>
               <div className="text-2xl md:text-4xl font-display font-bold text-foreground mb-1">
                 {stat.value}
               </div>
-              <div className="text-xs md:text-sm text-muted-foreground">
+              <div className="text-xs md:text-sm text-foreground/70">
                 {stat.label}
               </div>
             </motion.div>
@@ -73,7 +73,7 @@ export function TestimonialsSection() {
             Trusted by
             <span className="text-foreground/70"> Security-Minded</span> Professionals
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
             Join thousands who've taken control of their network privacy.
           </p>
         </motion.div>
@@ -89,16 +89,16 @@ export function TestimonialsSection() {
               transition={{ duration: 0.6, delay: index * 0.15 }}
               className="relative"
             >
-              <div className="h-full p-6 rounded-2xl neu-raised hover:neu-lg transition-all duration-300 group">
+              <div className="h-full p-6 rounded-2xl bg-background border border-border hover:shadow-lg transition-all duration-300 group">
                 {/* Quote icon */}
-                <div className="w-10 h-10 rounded-full neu-inset flex items-center justify-center mb-4">
-                  <Quote className="w-5 h-5 text-foreground/50" />
+                <div className="w-10 h-10 rounded-full bg-foreground/10 border border-border flex items-center justify-center mb-4">
+                  <Quote className="w-5 h-5 text-foreground" />
                 </div>
                 
                 {/* Stars */}
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-foreground/30 text-foreground/30" />
+                    <Star key={i} className="w-4 h-4 fill-foreground text-foreground" />
                   ))}
                 </div>
 
@@ -109,12 +109,12 @@ export function TestimonialsSection() {
 
                 {/* Author */}
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full neu-raised flex items-center justify-center text-sm font-bold text-foreground/70">
+                  <div className="w-10 h-10 rounded-full bg-foreground text-background flex items-center justify-center text-sm font-bold">
                     {testimonial.avatar}
                   </div>
                   <div>
                     <div className="font-semibold text-foreground">{testimonial.author}</div>
-                    <div className="text-sm text-muted-foreground">{testimonial.role}</div>
+                    <div className="text-sm text-foreground/70">{testimonial.role}</div>
                   </div>
                 </div>
               </div>
