@@ -126,17 +126,18 @@
   /* Neumorphic utilities */
   .neu-flat {
     box-shadow: var(--shadow-neu-md);
-    background: hsl(var(--background));
+    background-color: hsl(var(--background));
   }
 
   .neu-raised {
     box-shadow: var(--shadow-neu-lg);
-    background: linear-gradient(145deg, hsl(var(--neu-light)), hsl(var(--background)));
+    /* Use background-color (not `background`) so Tailwind `bg-*` utilities can override it */
+    background-color: hsl(var(--surface-elevated));
   }
 
   .neu-pressed {
     box-shadow: var(--shadow-neu-inset);
-    background: hsl(var(--background));
+    background-color: hsl(var(--background));
   }
 
   .neu-sm {
