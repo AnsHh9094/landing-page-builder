@@ -51,7 +51,7 @@ export function Globe({
     setMounted(true);
   }, []);
 
-  // Fixed globe configuration - consistent light gray colors
+  // Fixed globe configuration - consistent colors
   const config: COBEOptions = {
     width: 800,
     height: 800,
@@ -60,13 +60,13 @@ export function Globe({
     phi: 0,
     theta: 0.3,
     dark: 0,
-    diffuse: 0.6,
+    diffuse: 0.5,
     mapSamples: 16000,
-    mapBrightness: 2,
-    // Light gray colors - visible on both light and dark backgrounds
-    baseColor: [0.92, 0.93, 0.95],
-    markerColor: [0.5, 0.55, 0.65],
-    glowColor: [0.85, 0.87, 0.9],
+    mapBrightness: 1.4,
+    // Slightly darker gray tones
+    baseColor: [0.82, 0.84, 0.88],
+    markerColor: [0.45, 0.5, 0.6],
+    glowColor: [0.75, 0.78, 0.82],
     markers: [
       { location: [14.5995, 120.9842], size: 0.03 },
       { location: [19.076, 72.8777], size: 0.1 },
