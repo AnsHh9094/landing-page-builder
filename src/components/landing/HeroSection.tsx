@@ -52,14 +52,14 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen overflow-hidden pt-16">
       {/* World Map - Full Section Background */}
-      <div className="absolute inset-0 flex items-start justify-center pt-20">
+      <div className="absolute inset-0 flex items-start justify-center pt-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2 }}
           className="w-full max-w-[2000px] px-4"
         >
-          <WorldMap dots={connectionDots} lineColor="hsl(220, 20%, 35%)" />
+          <WorldMap dots={connectionDots} lineColor="#1f2937" />
         </motion.div>
       </div>
 
