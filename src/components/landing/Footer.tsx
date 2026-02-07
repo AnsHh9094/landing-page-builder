@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Github, Twitter, Mail, ArrowRight } from "lucide-react";
+import { Shield, Github, Twitter, Mail, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
-import { GooeyText } from "@/components/ui/gooey-text-morphing";
 
 const footerLinks = {
   product: [
@@ -120,13 +119,10 @@ export function Footer() {
           {/* Brand column */}
           <div className="lg:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <GooeyText
-                texts={["WhaleScale", "🐋 Scale", "WhaleScale"]}
-                morphTime={1.5}
-                cooldownTime={2}
-                className="text-xl font-display font-bold"
-                textClassName="text-foreground"
-              />
+              <div className="w-10 h-10 rounded-xl bg-foreground/10 border border-border flex items-center justify-center">
+                <Shield className="w-5 h-5 text-foreground" />
+              </div>
+              <span className="text-xl font-display font-bold text-foreground">WhaleScale</span>
             </div>
             <p className="text-foreground/70 mb-6 max-w-sm">
               Your self-hosted control panel for creating private mesh networks. Simple, secure, and cross-platform.
