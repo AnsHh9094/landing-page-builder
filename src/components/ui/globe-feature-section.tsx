@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import createGlobe, { COBEOptions } from "cobe";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useTheme } from "next-themes";
 import { cn } from "@/lib/utils";
 
 export default function GlobeFeatureSection() {
@@ -39,7 +38,6 @@ export function Globe({
 }: {
   className?: string;
 }) {
-  const { resolvedTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
   
   let phi = 0;
@@ -53,9 +51,7 @@ export function Globe({
     setMounted(true);
   }, []);
 
-  const isDark = mounted && resolvedTheme === "dark";
-
-  // Theme-aware globe configuration
+  // Fixed globe configuration - consistent colors regardless of theme
   const config: COBEOptions = {
     width: 800,
     height: 800,
@@ -63,16 +59,14 @@ export function Globe({
     devicePixelRatio: 2,
     phi: 0,
     theta: 0.3,
-    dark: isDark ? 1 : 0,
-    // Keep light mode very subtle so it doesn't read as a "white sticker"
-    diffuse: isDark ? 1.1 : 0.25,
+    dark: 0,
+    diffuse: 0.4,
     mapSamples: 16000,
-    mapBrightness: isDark ? 5.5 : 0.65,
-    // Match background: light mode ~hsl(225, 25%, 92%) / dark mode ~hsl(220, 20%, 10%)
-    baseColor: isDark ? [0.07, 0.08, 0.1] : [0.84, 0.85, 0.88],
-    markerColor: isDark ? [0.48, 0.58, 0.74] : [0.3, 0.33, 0.4],
-    // Keep glow the same as base so edges don't "halo" brighter than the page
-    glowColor: isDark ? [0.07, 0.08, 0.1] : [0.84, 0.85, 0.88],
+    mapBrightness: 1.2,
+    // Soft gray colors that work on both light and dark backgrounds
+    baseColor: [0.88, 0.89, 0.92],
+    markerColor: [0.35, 0.38, 0.45],
+    glowColor: [0.88, 0.89, 0.92],
     markers: [
       { location: [14.5995, 120.9842], size: 0.03 },
       { location: [19.076, 72.8777], size: 0.1 },
@@ -140,7 +134,7 @@ export function Globe({
       window.removeEventListener("resize", onResize);
       globe.destroy();
     };
-  }, [mounted, isDark, onRender]);
+  }, [mounted, onRender]);
 
   if (!mounted) {
     return (
@@ -165,9 +159,8 @@ export function Globe({
           // Feather the edges so it visually melts into the background
           "[mask-image:radial-gradient(circle_at_center,#000_62%,transparent_78%)]",
           "[-webkit-mask-image:radial-gradient(circle_at_center,#000_62%,transparent_78%)]",
-          // In light mode, gently blend the globe into the background
-          !isDark && "mix-blend-multiply opacity-75",
-          isDark && "opacity-90"
+          // Consistent blend for both themes
+          "mix-blend-multiply opacity-80"
         )}
         onPointerDown={(e) =>
           updatePointerInteraction(
