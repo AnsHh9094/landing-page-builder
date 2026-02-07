@@ -15,15 +15,15 @@ export function Navbar() {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50">
-      <div className="glass border-b border-border/30">
+      <div className="bg-background/80 backdrop-blur-md">
         <div className="container max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <a href="#" className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-lg gradient-bg flex items-center justify-center">
-                <Shield className="w-5 h-5 text-primary-foreground" />
+              <div className="w-9 h-9 rounded-xl neu-raised flex items-center justify-center">
+                <Shield className="w-5 h-5 text-foreground" />
               </div>
-              <span className="text-lg font-display font-bold">VPN Panel</span>
+              <span className="text-lg font-display font-bold text-foreground">VPN Panel</span>
             </a>
 
             {/* Desktop nav */}
@@ -41,21 +41,21 @@ export function Navbar() {
 
             {/* CTA button */}
             <div className="hidden md:block">
-              <Button asChild className="gradient-bg hover:opacity-90 transition-opacity">
+              <Button asChild className="neu-raised bg-foreground text-background hover:bg-foreground/90 border-0">
                 <a href="#contact">Get Early Access</a>
               </Button>
             </div>
 
             {/* Mobile menu button */}
             <button
-              className="md:hidden p-2"
+              className="md:hidden p-2 rounded-xl neu-sm"
               onClick={() => setIsOpen(!isOpen)}
               aria-label="Toggle menu"
             >
               {isOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6 text-foreground" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-6 h-6 text-foreground" />
               )}
             </button>
           </div>
@@ -69,7 +69,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden glass border-b border-border/30"
+            className="md:hidden bg-background/95 backdrop-blur-md"
           >
             <div className="container px-4 py-4">
               <div className="flex flex-col gap-4">
@@ -85,7 +85,7 @@ export function Navbar() {
                 ))}
                 <Button
                   asChild
-                  className="w-full gradient-bg hover:opacity-90 transition-opacity mt-2"
+                  className="w-full neu-raised bg-foreground text-background hover:bg-foreground/90 border-0 mt-2"
                 >
                   <a href="#contact" onClick={() => setIsOpen(false)}>
                     Get Early Access

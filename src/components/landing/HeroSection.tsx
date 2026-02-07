@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Shield, Wifi, Zap, ArrowDown } from "lucide-react";
+import { Shield, Wifi, Zap, ArrowDown, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
@@ -51,18 +51,15 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen overflow-hidden pt-16">
-      {/* Ambient glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/15 rounded-full blur-[150px]" />
-      
       {/* World Map - Full Section Background */}
-      <div className="absolute inset-0 flex items-start justify-center pt-20">
+      <div className="absolute inset-0 flex items-start justify-center pt-20 opacity-60">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1.2 }}
           className="w-full max-w-[2000px] px-4"
         >
-          <WorldMap dots={connectionDots} lineColor="hsl(262, 83%, 58%)" />
+          <WorldMap dots={connectionDots} lineColor="hsl(220, 15%, 40%)" />
         </motion.div>
       </div>
 
@@ -79,60 +76,65 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-background/80 backdrop-blur-md border border-border/50 mb-6"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full neu-raised mb-8"
           >
-            <Shield className="w-4 h-4 text-accent" />
+            <Sparkles className="w-4 h-4 text-foreground/70" />
             <span className="text-sm font-medium text-muted-foreground">Powered by WireGuard®</span>
           </motion.div>
 
           {/* Headline */}
-          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-4 drop-shadow-lg">
-            Global <span className="gradient-text">Mesh Network</span>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 text-foreground">
+            Global <span className="text-foreground/70">Mesh Network</span>
           </h1>
 
-          <p className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto mb-8 drop-shadow-md">
+          <p className="text-muted-foreground text-lg md:text-xl max-w-xl mx-auto mb-10">
             Connect all your devices securely through your VPS. Zero config, works everywhere.
           </p>
 
-          {/* Waitlist form */}
+          {/* Waitlist form - Neumorphic */}
           <motion.form
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             onSubmit={handleWaitlistSubmit}
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-8"
+            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto mb-10"
           >
             <Input
               type="email"
               placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-12 bg-background/80 backdrop-blur-md border-border/50"
+              className="h-12 neu-inset border-0 bg-background focus:ring-2 focus:ring-foreground/20"
               disabled={isLoading}
             />
-            <Button type="submit" size="lg" className="h-12 px-8 gradient-bg glow-sm" disabled={isLoading}>
+            <Button 
+              type="submit" 
+              size="lg" 
+              className="h-12 px-8 neu-raised bg-foreground text-background hover:bg-foreground/90 border-0" 
+              disabled={isLoading}
+            >
               {isLoading ? "..." : "Join Waitlist"}
             </Button>
           </motion.form>
 
-          {/* Trust indicators */}
+          {/* Trust indicators - Neumorphic pills */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
-            className="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm"
+            className="flex flex-wrap items-center justify-center gap-4"
           >
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/60 backdrop-blur-sm text-muted-foreground">
-              <Wifi className="w-4 h-4 text-accent" />
-              <span>Works behind NAT</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full neu-sm bg-background text-muted-foreground">
+              <Wifi className="w-4 h-4" />
+              <span className="text-sm">Works behind NAT</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/60 backdrop-blur-sm text-muted-foreground">
-              <Shield className="w-4 h-4 text-primary" />
-              <span>Encrypted</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full neu-sm bg-background text-muted-foreground">
+              <Shield className="w-4 h-4" />
+              <span className="text-sm">Encrypted</span>
             </div>
-            <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-background/60 backdrop-blur-sm text-muted-foreground">
-              <Zap className="w-4 h-4 text-accent" />
-              <span>Zero-config</span>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full neu-sm bg-background text-muted-foreground">
+              <Zap className="w-4 h-4" />
+              <span className="text-sm">Zero-config</span>
             </div>
           </motion.div>
         </motion.div>
@@ -147,8 +149,9 @@ export function HeroSection() {
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 1.5, repeat: Infinity }}
+            className="w-10 h-10 rounded-full neu-raised flex items-center justify-center"
           >
-            <ArrowDown className="w-5 h-5 text-muted-foreground/50" />
+            <ArrowDown className="w-4 h-4 text-muted-foreground" />
           </motion.div>
         </motion.div>
       </div>
