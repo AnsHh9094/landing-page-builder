@@ -64,12 +64,13 @@ export function Globe({
     phi: 0,
     theta: 0.3,
     dark: isDark ? 1 : 0,
-    diffuse: isDark ? 1.2 : 0.4,
+    diffuse: isDark ? 1.2 : 0.6,
     mapSamples: 16000,
-    mapBrightness: isDark ? 6 : 1.2,
-    baseColor: isDark ? [0.15, 0.18, 0.22] : [0.88, 0.89, 0.92],
-    markerColor: isDark ? [0.6, 0.7, 0.85] : [0.25, 0.28, 0.35],
-    glowColor: isDark ? [0.12, 0.15, 0.2] : [0.85, 0.87, 0.9],
+    mapBrightness: isDark ? 6 : 1.5,
+    // Match background: light mode ~hsl(225, 25%, 92%) = rgb(225, 227, 233) / dark mode ~hsl(220, 20%, 10%) = rgb(21, 24, 28)
+    baseColor: isDark ? [0.08, 0.09, 0.11] : [0.88, 0.89, 0.91],
+    markerColor: isDark ? [0.5, 0.6, 0.75] : [0.35, 0.38, 0.45],
+    glowColor: isDark ? [0.08, 0.09, 0.11] : [0.88, 0.89, 0.91],
     markers: [
       { location: [14.5995, 120.9842], size: 0.03 },
       { location: [19.076, 72.8777], size: 0.1 },
@@ -141,8 +142,8 @@ export function Globe({
 
   if (!mounted) {
     return (
-      <div className={cn("relative flex items-center justify-center overflow-hidden rounded-2xl bg-muted neu-raised", className)}>
-        <div className="h-full w-full animate-pulse bg-muted" />
+      <div className={cn("relative flex items-center justify-center overflow-hidden rounded-2xl bg-background", className)}>
+        <div className="h-full w-full animate-pulse bg-muted/50" />
       </div>
     );
   }
@@ -150,13 +151,13 @@ export function Globe({
   return (
     <div
       className={cn(
-        "relative flex items-center justify-center overflow-hidden rounded-2xl bg-muted neu-raised",
+        "relative flex items-center justify-center overflow-hidden rounded-2xl bg-background",
         className
       )}
     >
       {/* Subtle gradient overlay for depth */}
-      <div className="absolute inset-0 pointer-events-none z-10 rounded-2xl bg-gradient-to-br from-background/20 via-transparent to-foreground/10" />
-      <div className="absolute inset-0 pointer-events-none z-10 rounded-2xl bg-gradient-to-t from-background/30 via-transparent to-transparent" />
+      <div className="absolute inset-0 pointer-events-none z-10 rounded-2xl bg-gradient-to-br from-foreground/5 via-transparent to-foreground/5" />
+      <div className="absolute inset-0 pointer-events-none z-10 rounded-2xl bg-gradient-to-t from-background/20 via-transparent to-transparent" />
       
       <canvas
         ref={canvasRef}
