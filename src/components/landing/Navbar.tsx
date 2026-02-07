@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { GooeyText } from "@/components/ui/gooey-text-morphing";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -21,10 +22,13 @@ export function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <a href="#" className="flex items-center gap-2">
-              <div className="w-9 h-9 rounded-xl bg-foreground/10 border border-border flex items-center justify-center">
-                <Shield className="w-5 h-5 text-foreground" />
-              </div>
-              <span className="text-lg font-display font-bold text-foreground">WhaleScale</span>
+              <GooeyText
+                texts={["WhaleScale", "🐋 Scale", "WhaleScale"]}
+                morphTime={1.5}
+                cooldownTime={2}
+                className="text-lg font-display font-bold"
+                textClassName="text-foreground"
+              />
             </a>
 
             {/* Desktop nav */}
