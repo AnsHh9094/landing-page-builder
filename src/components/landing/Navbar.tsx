@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Shield, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -39,25 +40,29 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* CTA button */}
-            <div className="hidden md:block">
+            {/* Right side: Theme toggle + CTA */}
+            <div className="hidden md:flex items-center gap-3">
+              <ThemeToggle />
               <Button asChild className="bg-foreground text-background hover:bg-foreground/90 border-0">
                 <a href="#contact">Get Early Access</a>
               </Button>
             </div>
 
-            {/* Mobile menu button */}
-            <button
-              className="md:hidden p-2 rounded-xl neu-sm"
-              onClick={() => setIsOpen(!isOpen)}
-              aria-label="Toggle menu"
-            >
-              {isOpen ? (
-                <X className="w-6 h-6 text-foreground" />
-              ) : (
-                <Menu className="w-6 h-6 text-foreground" />
-              )}
-            </button>
+            {/* Mobile: Theme toggle + menu button */}
+            <div className="md:hidden flex items-center gap-2">
+              <ThemeToggle />
+              <button
+                className="p-2 rounded-xl bg-foreground/10 border border-border"
+                onClick={() => setIsOpen(!isOpen)}
+                aria-label="Toggle menu"
+              >
+                {isOpen ? (
+                  <X className="w-6 h-6 text-foreground" />
+                ) : (
+                  <Menu className="w-6 h-6 text-foreground" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -69,7 +74,7 @@ export function Navbar() {
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
-            className="md:hidden bg-background/95 backdrop-blur-md"
+            className="md:hidden bg-background border-b border-border"
           >
             <div className="container px-4 py-4">
               <div className="flex flex-col gap-4">
@@ -77,7 +82,7 @@ export function Navbar() {
                   <a
                     key={link.label}
                     href={link.href}
-                    className="text-muted-foreground hover:text-foreground transition-colors py-2"
+                    className="text-foreground/70 hover:text-foreground transition-colors py-2"
                     onClick={() => setIsOpen(false)}
                   >
                     {link.label}
@@ -85,7 +90,7 @@ export function Navbar() {
                 ))}
                 <Button
                   asChild
-                  className="w-full neu-raised bg-foreground text-background hover:bg-foreground/90 border-0 mt-2"
+                  className="w-full bg-foreground text-background hover:bg-foreground/90 border-0 mt-2"
                 >
                   <a href="#contact" onClick={() => setIsOpen(false)}>
                     Get Early Access
