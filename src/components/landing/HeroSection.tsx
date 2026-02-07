@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { WorldMap } from "@/components/ui/world-map";
-
+import { GooeyText } from "@/components/ui/gooey-text-morphing";
 const connectionDots = [
   { start: { lat: 40.7128, lng: -74.006 }, end: { lat: 51.5074, lng: -0.1278 } },
   { start: { lat: 51.5074, lng: -0.1278 }, end: { lat: 35.6762, lng: 139.6503 } },
@@ -84,7 +84,13 @@ export function HeroSection() {
 
           {/* Headline */}
           <h1 className="text-4xl md:text-6xl lg:text-7xl font-display font-bold leading-tight mb-6 text-foreground">
-            Global <span className="text-foreground/70">Mesh Network</span>
+            <GooeyText
+              texts={["Global Mesh Network", "Secure Connectivity", "Private Infrastructure", "Zero Configuration"]}
+              morphTime={1.5}
+              cooldownTime={2}
+              className="block"
+              textClassName="text-foreground/70"
+            />
           </h1>
 
           <p className="text-foreground/70 text-lg md:text-xl max-w-xl mx-auto mb-10">
