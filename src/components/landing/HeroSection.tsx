@@ -76,10 +76,10 @@ export function HeroSection() {
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full neu-raised mb-8"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-background border border-border mb-8"
           >
-            <Sparkles className="w-4 h-4 text-foreground/70" />
-            <span className="text-sm font-medium text-muted-foreground">Powered by WireGuard®</span>
+            <Sparkles className="w-4 h-4 text-foreground" />
+            <span className="text-sm font-medium text-foreground">Powered by WireGuard®</span>
           </motion.div>
 
           {/* Headline */}
