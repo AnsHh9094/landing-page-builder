@@ -122,10 +122,10 @@ export function Footer() {
               <div className="w-10 h-10 rounded-xl bg-foreground/10 border border-border flex items-center justify-center">
                 <Shield className="w-5 h-5 text-foreground" />
               </div>
-              <span className="text-xl font-display font-bold text-foreground">VPN Panel</span>
+              <span className="text-xl font-display font-bold text-foreground">WhaleScale</span>
             </div>
             <p className="text-foreground/70 mb-6 max-w-sm">
-              Your self-hosted VPN control panel for creating private mesh networks. Simple, secure, and cross-platform.
+              Your self-hosted control panel for creating private mesh networks. Simple, secure, and cross-platform.
             </p>
             <div className="flex gap-4">
               <a
@@ -202,7 +202,7 @@ export function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-sm text-foreground/70">
-            © 2024 VPN Panel. All rights reserved.
+            © 2024 WhaleScale. All rights reserved.
           </p>
           <p className="text-sm text-foreground/70">
             Powered by WireGuard® — the most secure VPN protocol.
