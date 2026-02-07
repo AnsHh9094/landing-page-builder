@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Shield, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { WhaleIcon } from "@/components/icons/WhaleIcon";
 
 const navLinks = [
   { label: "Features", href: "#features" },
@@ -22,7 +23,7 @@ export function Navbar() {
             {/* Logo */}
             <a href="#" className="flex items-center gap-2">
               <div className="w-9 h-9 rounded-xl bg-foreground/10 border border-border flex items-center justify-center">
-                <Shield className="w-5 h-5 text-foreground" />
+                <WhaleIcon size={22} />
               </div>
               <span className="text-lg font-display font-bold text-foreground">WhaleScale</span>
             </a>
