@@ -76,7 +76,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative pt-24 pb-8 px-4 overflow-hidden">
+    <footer className="relative pt-24 pb-8 px-4 overflow-hidden bg-[#020617]">
       <div className="container max-w-7xl mx-auto relative z-10">
         {/* CTA Banner */}
         <motion.div

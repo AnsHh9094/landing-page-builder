@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Shield, Wifi, Zap, ArrowDown, Sparkles } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { WorldMap } from "@/components/ui/world-map";
 import { GooeyText } from "@/components/ui/gooey-text-morphing";
+import { EncryptButton } from "./EncryptButton";
 const connectionDots = [
   { start: { lat: 40.7128, lng: -74.006 }, end: { lat: 51.5074, lng: -0.1278 } },
   { start: { lat: 51.5074, lng: -0.1278 }, end: { lat: 35.6762, lng: 139.6503 } },
@@ -22,14 +22,14 @@ export function HeroSection() {
 
   const handleWaitlistSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!email || !email.includes("@")) {
       toast({ title: "Invalid email", description: "Please enter a valid email address.", variant: "destructive" });
       return;
     }
 
     setIsLoading(true);
-    
+
     try {
       const { error } = await supabase.from("waitlist").insert({ email: email.trim().toLowerCase() });
 
@@ -50,7 +50,9 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden pt-16">
+    <section className="relative min-h-screen overflow-hidden pt-16 bg-[#020617]">
+      {/* Bottom gradient fade for smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#020617] to-transparent z-[5]" />
       {/* World Map - Full Section Background */}
       <div className="absolute inset-0 flex items-start justify-center pt-16">
         <motion.div
@@ -110,17 +112,17 @@ export function HeroSection() {
               placeholder="your@email.com"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="h-12 bg-muted border-border focus:ring-2 focus:ring-foreground/20"
+              className="cursor-target h-12 bg-muted border-border focus:ring-2 focus:ring-foreground/20"
               disabled={isLoading}
             />
-            <Button 
-              type="submit" 
-              size="lg" 
-              className="h-12 px-8 bg-foreground text-background hover:bg-foreground/90 border-0" 
-              disabled={isLoading}
-            >
-              {isLoading ? "..." : "Join Waitlist"}
-            </Button>
+            <div className="cursor-target">
+              <EncryptButton
+                type="submit"
+                text={isLoading ? "..." : "Join Waitlist"}
+                className="h-12 px-8"
+                disabled={isLoading}
+              />
+            </div>
           </motion.form>
 
           {/* Trust indicators */}

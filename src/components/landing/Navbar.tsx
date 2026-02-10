@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { EncryptButton } from "./EncryptButton";
 import { WhaleIcon } from "@/components/icons/WhaleIcon";
 
 const navLinks = [
@@ -21,7 +21,7 @@ export function Navbar() {
         <div className="container max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <a href="#" className="flex items-center gap-2">
+            <a href="#" className="cursor-target flex items-center gap-2">
               <div className="w-9 h-9 rounded-xl bg-foreground/10 border border-border flex items-center justify-center">
                 <WhaleIcon size={22} />
               </div>
@@ -34,7 +34,7 @@ export function Navbar() {
                 <a
                   key={link.label}
                   href={link.href}
-                  className="text-sm text-foreground/70 hover:text-foreground transition-colors"
+                  className="cursor-target text-sm text-foreground/70 hover:text-foreground transition-colors"
                 >
                   {link.label}
                 </a>
@@ -44,9 +44,9 @@ export function Navbar() {
             {/* Right side: Theme toggle + CTA */}
             <div className="hidden md:flex items-center gap-3">
               <ThemeToggle />
-              <Button asChild className="bg-foreground text-background hover:bg-foreground/90 border-0">
-                <a href="#contact">Get Early Access</a>
-              </Button>
+              <a href="#contact" className="cursor-target">
+                <EncryptButton text="Join the Waitlist" className="px-4 py-2" />
+              </a>
             </div>
 
             {/* Mobile: Theme toggle + menu button */}
@@ -89,14 +89,9 @@ export function Navbar() {
                     {link.label}
                   </a>
                 ))}
-                <Button
-                  asChild
-                  className="w-full bg-foreground text-background hover:bg-foreground/90 border-0 mt-2"
-                >
-                  <a href="#contact" onClick={() => setIsOpen(false)}>
-                    Get Early Access
-                  </a>
-                </Button>
+                <a href="#contact" onClick={() => setIsOpen(false)} className="mt-2">
+                  <EncryptButton text="Join the Waitlist" className="w-full px-4 py-2" />
+                </a>
               </div>
             </div>
           </motion.div>

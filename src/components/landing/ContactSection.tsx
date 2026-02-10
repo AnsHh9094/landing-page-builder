@@ -2,6 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Send, Mail, MessageSquare, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { HoverButton } from "@/components/ui/hover-glow-button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
@@ -78,7 +79,7 @@ export function ContactSection() {
   };
 
   return (
-    <section className="py-24 px-4 relative overflow-hidden" id="contact">
+    <section className="py-24 px-4 relative overflow-hidden bg-[#020617]" id="contact">
       <div className="container max-w-4xl mx-auto relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -114,6 +115,8 @@ export function ContactSection() {
                 </Label>
                 <Input
                   id="name"
+                  name="name"
+                  autoComplete="name"
                   type="text"
                   placeholder="Your name"
                   value={formData.name}
@@ -134,6 +137,8 @@ export function ContactSection() {
                 </Label>
                 <Input
                   id="email"
+                  name="email"
+                  autoComplete="email"
                   type="email"
                   placeholder="your@email.com"
                   value={formData.email}
@@ -155,6 +160,8 @@ export function ContactSection() {
               </Label>
               <Textarea
                 id="message"
+                name="message"
+                autoComplete="off"
                 placeholder="Tell us what you're thinking..."
                 value={formData.message}
                 onChange={(e) => handleChange("message", e.target.value)}
@@ -166,21 +173,22 @@ export function ContactSection() {
               )}
             </div>
 
-            <Button
+            <HoverButton
               type="submit"
-              size="lg"
-              className="w-full h-12 bg-foreground text-background hover:bg-foreground/90 border-0"
+              className="w-full"
               disabled={isLoading}
+              glowColor="#38bdf8" // sky-400
+              hoverTextColor="#38bdf8"
             >
               {isLoading ? (
                 "Sending..."
               ) : (
-                <>
+                <span className="flex items-center justify-center gap-2">
                   Send Message
-                  <Send className="w-4 h-4 ml-2" />
-                </>
+                  <Send className="w-4 h-4" />
+                </span>
               )}
-            </Button>
+            </HoverButton>
           </form>
         </motion.div>
       </div>

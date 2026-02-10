@@ -1,12 +1,16 @@
-import { motion } from "framer-motion";
-import { 
-  Server, 
-  LayoutDashboard, 
-  Monitor, 
-  RefreshCw, 
-  Radio, 
-  ShieldCheck 
+import { motion, useMotionValue, useMotionTemplate, animate } from "framer-motion";
+import { useEffect } from "react";
+import { MagneticText } from "@/components/MagneticText";
+import {
+  Server,
+  LayoutDashboard,
+  Monitor,
+  RefreshCw,
+  Radio,
+  ShieldCheck
 } from "lucide-react";
+
+const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
 const features = [
   {
@@ -62,9 +66,55 @@ const itemVariants = {
   },
 };
 
-export function FeaturesSection() {
+// CSS-based animated stars
+const StarField = () => {
   return (
-    <section className="py-24 px-4 relative overflow-hidden" id="features">
+    <div className="absolute inset-0 overflow-hidden">
+      {[...Array(100)].map((_, i) => (
+        <div
+          key={i}
+          className="absolute rounded-full bg-white animate-pulse"
+          style={{
+            width: Math.random() * 3 + 1 + "px",
+            height: Math.random() * 3 + 1 + "px",
+            top: Math.random() * 100 + "%",
+            left: Math.random() * 100 + "%",
+            opacity: Math.random() * 0.7 + 0.3,
+            animationDelay: Math.random() * 3 + "s",
+            animationDuration: Math.random() * 3 + 2 + "s",
+          }}
+        />
+      ))}
+    </div>
+  );
+};
+
+export function FeaturesSection() {
+  const color = useMotionValue(COLORS_TOP[0]);
+
+  useEffect(() => {
+    animate(color, COLORS_TOP, {
+      ease: "easeInOut",
+      duration: 10,
+      repeat: Infinity,
+      repeatType: "mirror",
+    });
+  }, [color]);
+
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
+
+  return (
+    <motion.section
+      style={{ backgroundImage }}
+      className="py-24 px-4 relative overflow-hidden bg-[#020617]"
+      id="features"
+    >
+      {/* Bottom gradient fade for smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent z-[5]" />
+
+      {/* Animated Stars Background */}
+      <StarField />
+
       <div className="container max-w-7xl mx-auto relative z-10">
         {/* Section header */}
         <motion.div
@@ -74,11 +124,23 @@ export function FeaturesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-foreground">
-            Everything You Need for
-            <span className="block text-foreground/70">Private Networking</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
+            <MagneticText body="Everything You Need for" as="span" className="block">
+              {(tokens) =>
+                tokens.map((token, index) => (
+                  <MagneticText.Token key={index} body={token} className="inline-block cursor-default whitespace-pre" />
+                ))
+              }
+            </MagneticText>
+            <MagneticText body="Private Networking" as="span" className="block text-gray-400">
+              {(tokens) =>
+                tokens.map((token, index) => (
+                  <MagneticText.Token key={index} body={token} className="inline-block cursor-default whitespace-pre" />
+                ))
+              }
+            </MagneticText>
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             Built from the ground up for simplicity, security, and reliability.
           </p>
         </motion.div>
@@ -97,17 +159,17 @@ export function FeaturesSection() {
               variants={itemVariants}
               className="group relative"
             >
-              <div className="h-full p-6 rounded-2xl bg-background border border-border hover:shadow-lg transition-all duration-300">
+              <div className="h-full p-6 rounded-2xl bg-gray-900/50 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600 hover:shadow-lg transition-all duration-300">
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-foreground/10 border border-border flex items-center justify-center mb-4">
-                  <feature.icon className="w-7 h-7 text-foreground" />
+                <div className="w-14 h-14 rounded-xl bg-gray-800/50 border border-gray-700/50 flex items-center justify-center mb-4">
+                  <feature.icon className="w-7 h-7 text-gray-300" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-display font-semibold mb-2 text-foreground">
+                <h3 className="text-xl font-display font-semibold mb-2 text-white">
                   {feature.title}
                 </h3>
-                <p className="text-foreground/70 leading-relaxed">
+                <p className="text-gray-400 leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -115,6 +177,7 @@ export function FeaturesSection() {
           ))}
         </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 }
+

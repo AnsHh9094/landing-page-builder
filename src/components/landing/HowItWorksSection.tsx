@@ -1,30 +1,12 @@
 import { motion } from "framer-motion";
-import { Cloud, MonitorSmartphone, Globe, ArrowRight } from "lucide-react";
-
-const steps = [
-  {
-    number: "01",
-    icon: Cloud,
-    title: "Deploy to Your VPS",
-    description: "One-click deployment to any VPS. Your server, your data, your rules.",
-  },
-  {
-    number: "02",
-    icon: MonitorSmartphone,
-    title: "Add Your Devices",
-    description: "Use the dashboard to add devices. Windows, Android, Linux - all supported.",
-  },
-  {
-    number: "03",
-    icon: Globe,
-    title: "Connect Securely",
-    description: "Your private mesh network is ready. Connect from anywhere, securely.",
-  },
-];
+import DatabaseWithRestApi from "@/components/ui/database-with-rest-api";
 
 export function HowItWorksSection() {
   return (
-    <section className="py-24 px-4 relative overflow-hidden" id="how-it-works">
+    <section className="py-24 px-4 relative overflow-hidden bg-[#020617]" id="how-it-works">
+      {/* Bottom gradient fade for smooth transition to next section */}
+      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#020617] to-transparent z-[5]" />
+
       <div className="container max-w-6xl mx-auto relative z-10">
         {/* Section header */}
         <motion.div
@@ -34,63 +16,73 @@ export function HowItWorksSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-foreground">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
             Up and Running in
-            <span className="text-foreground/70"> 3 Simple Steps</span>
+            <span className="text-gray-400"> 3 Simple Steps</span>
           </h2>
-          <p className="text-lg text-foreground/70 max-w-2xl mx-auto">
+          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
             No complex configurations. No networking expertise required.
           </p>
         </motion.div>
 
-        {/* Steps */}
-        <div className="relative">
-          {/* Connection line */}
-          <div className="hidden lg:block absolute top-1/2 left-0 right-0 h-0.5 bg-border transform -translate-y-1/2" />
-          
-          <div className="grid md:grid-cols-3 gap-8 lg:gap-12">
-            {steps.map((step, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.2 }}
-                className="relative"
-              >
-                {/* Step card */}
-                <div className="relative p-8 rounded-2xl bg-background border border-border hover:shadow-lg transition-all duration-300 group">
-                  {/* Step number */}
-                  <div className="absolute -top-4 left-8 px-4 py-1.5 rounded-full bg-foreground text-background text-sm font-bold">
-                    {step.number}
-                  </div>
+        {/* Database REST API Visualization */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="flex justify-center"
+        >
+          <DatabaseWithRestApi
+            circleText="VPN"
+            title="Secure mesh network through your VPS"
+            badgeTexts={{
+              first: "Deploy",
+              second: "Config",
+              third: "Connect",
+              fourth: "Secure"
+            }}
+            buttonTexts={{
+              first: "WhaleScale",
+              second: "mesh_network"
+            }}
+            lightColor="#10B981"
+            className="w-full max-w-[800px]"
+          />
+        </motion.div>
 
-                  {/* Icon */}
-                  <div className="w-16 h-16 rounded-2xl bg-foreground/10 border border-border flex items-center justify-center mb-6">
-                    <step.icon className="w-8 h-8 text-foreground" />
-                  </div>
-
-                  {/* Content */}
-                  <h3 className="text-xl font-display font-semibold mb-3 text-foreground">
-                    {step.title}
-                  </h3>
-                  <p className="text-foreground/70">
-                    {step.description}
-                  </p>
-                </div>
-
-                {/* Arrow connector (hidden on last item) */}
-                {index < steps.length - 1 && (
-                  <div className="hidden md:flex absolute top-1/2 -right-6 lg:-right-8 transform -translate-y-1/2 z-10">
-                    <div className="w-8 h-8 rounded-full bg-background border border-border flex items-center justify-center">
-                      <ArrowRight className="w-4 h-4 text-foreground" />
-                    </div>
-                  </div>
-                )}
-              </motion.div>
-            ))}
+        {/* Steps description below */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-16 grid md:grid-cols-3 gap-8 text-center"
+        >
+          <div className="p-6">
+            <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mb-4">
+              <span className="text-emerald-400 font-bold">01</span>
+            </div>
+            <h3 className="text-lg font-semibold text-white mb-2">Deploy to Your VPS</h3>
+            <p className="text-gray-400 text-sm">One-click deployment to any VPS. Your server, your data, your rules.</p>
           </div>
-        </div>
+
+          <div className="p-6">
+            <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mb-4">
+              <span className="text-emerald-400 font-bold">02</span>
+            </div>
+            <h3 className="text-lg font-semibold text-white mb-2">Add Your Devices</h3>
+            <p className="text-gray-400 text-sm">Use the dashboard to add devices. Windows, Android, Linux - all supported.</p>
+          </div>
+
+          <div className="p-6">
+            <div className="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center mb-4">
+              <span className="text-emerald-400 font-bold">03</span>
+            </div>
+            <h3 className="text-lg font-semibold text-white mb-2">Connect Securely</h3>
+            <p className="text-gray-400 text-sm">Your private mesh network is ready. Connect from anywhere, securely.</p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -52,7 +53,7 @@
     /* Gradients - Subtle for neumorphic */
     --gradient-primary: linear-gradient(145deg, hsl(225 25% 95%), hsl(225 20% 88%));
     --gradient-accent: linear-gradient(145deg, hsl(225 20% 88%), hsl(225 15% 82%));
-    
+
     --sidebar-background: 220 20% 95%;
     --sidebar-foreground: 220 20% 20%;
     --sidebar-primary: 220 15% 30%;
@@ -109,6 +110,12 @@
     --sidebar-accent-foreground: 220 20% 90%;
     --sidebar-border: 220 15% 20%;
     --sidebar-ring: 220 15% 70%;
+
+    --button-ripple-color: oklch(0.985 0 0 / 0.5);
+  }
+
+  :root {
+    --button-ripple-color: oklch(0.145 0 0 / 0.3);
   }
 }
 
@@ -123,6 +130,7 @@
 }
 
 @layer utilities {
+
   /* Neumorphic utilities */
   .neu-flat {
     box-shadow: var(--shadow-neu-md);
@@ -197,18 +205,24 @@
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
   }
+
   50% {
     transform: translateY(-20px);
   }
 }
 
 @keyframes pulse-glow {
-  0%, 100% {
+
+  0%,
+  100% {
     box-shadow: var(--shadow-neu-md);
   }
+
   50% {
     box-shadow: var(--shadow-neu-lg);
   }
@@ -218,10 +232,48 @@
   0% {
     background-position: 0% 50%;
   }
+
   50% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0% 50%;
+  }
+}
+
+/* Database REST API Component Animations */
+.database {
+  offset-anchor: 10px 0px;
+  animation: database-animation-path;
+  animation-iteration-count: infinite;
+  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  animation-duration: 4s;
+  animation-delay: 1s;
+}
+
+.db-light-1 {
+  offset-path: path("M 31 10 v 15 q 0 5 5 5 h 59 q 5 0 5 5 v 25");
+}
+
+.db-light-2 {
+  offset-path: path("M 77 10 v 10 q 0 5 5 5 h 13 q 5 0 5 5 v 25");
+}
+
+.db-light-3 {
+  offset-path: path("M 124 10 v 10 q 0 5 -5 5 h -14 q -5 0 -5 5 v 25");
+}
+
+.db-light-4 {
+  offset-path: path("M 170 10 v 15 q 0 5 -5 5 h -60 q -5 0 -5 5 v 25");
+}
+
+@keyframes database-animation-path {
+  0% {
+    offset-distance: 0%;
+  }
+
+  100% {
+    offset-distance: 100%;
   }
 }
