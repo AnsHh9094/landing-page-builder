@@ -78,42 +78,6 @@ export function Footer() {
   return (
     <footer className="relative pt-24 pb-8 px-4 overflow-hidden bg-[#020617]">
       <div className="container max-w-7xl mx-auto relative z-10">
-        {/* CTA Banner */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="p-8 md:p-12 rounded-3xl bg-background border border-border mb-16 text-center"
-        >
-          <h3 className="text-2xl md:text-3xl font-display font-bold mb-4 text-foreground">
-            Ready to Take Control of Your <span className="text-foreground/70">Network Privacy</span>?
-          </h3>
-          <p className="text-foreground/70 mb-6 max-w-xl mx-auto">
-            Join the waitlist and be the first to know when we launch.
-          </p>
-          <form
-            onSubmit={handleWaitlistSubmit}
-            className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto"
-          >
-            <Input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="h-12 bg-muted border-border focus:ring-2 focus:ring-foreground/20"
-              disabled={isLoading}
-            />
-            <Button
-              type="submit"
-              size="lg"
-              className="h-12 px-6 bg-foreground text-background hover:bg-foreground/90 border-0"
-              disabled={isLoading}
-            >
-              {isLoading ? "..." : <><span>Join</span><ArrowRight className="w-4 h-4 ml-2" /></>}
-            </Button>
-          </form>
-        </motion.div>
-
         {/* Footer grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           {/* Brand column */}
