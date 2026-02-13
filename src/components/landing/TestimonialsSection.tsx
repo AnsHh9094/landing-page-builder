@@ -55,7 +55,7 @@ export function TestimonialsSection() {
       ref={containerRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="py-24 px-4 relative overflow-hidden bg-[#020617] cursor-crosshair"
+      className="py-24 px-4 relative overflow-hidden bg-background cursor-crosshair"
       id="testimonials"
       style={{
         '--mouse-x': '-9999px',
@@ -63,7 +63,7 @@ export function TestimonialsSection() {
       } as React.CSSProperties}
     >
       {/* Top gradient fade for smooth transition from previous section */}
-      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-[#020617] to-transparent z-[5]" />
+      <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-background to-transparent z-[5]" />
 
       {/* LaserFlow Background Effect */}
       <div className="absolute inset-0 z-0 pointer-events-none">
@@ -90,7 +90,7 @@ export function TestimonialsSection() {
       </div>
 
       {/* Bottom gradient fade for content visibility */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent z-[1]" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent z-[1]" />
 
       <div className="container max-w-7xl mx-auto relative z-10">
 

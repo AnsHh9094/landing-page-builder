@@ -76,7 +76,7 @@ export function Footer() {
   };
 
   return (
-    <footer className="relative pt-24 pb-8 px-4 overflow-hidden bg-[#020617]">
+    <footer className="relative pt-24 pb-8 px-4 overflow-hidden bg-background">
       <div className="container max-w-7xl mx-auto relative z-10">
         {/* Footer grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">

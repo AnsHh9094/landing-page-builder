@@ -1,4 +1,5 @@
 import { useRef, useEffect, useCallback, useState } from "react";
+import { useTheme } from "next-themes";
 import { motion } from "framer-motion";
 
 interface Dot {
@@ -182,6 +183,8 @@ export function WorldMap({ dots = [], lineColor = "hsl(220, 15%, 45%)" }: WorldM
     }>>([]);
     const landDotsRef = useRef<{ x: number; y: number }[]>([]);
     const lastSizeRef = useRef<{ w: number; h: number }>({ w: 0, h: 0 });
+    const { resolvedTheme } = useTheme();
+    const isDark = resolvedTheme === "dark";
 
     const draw = useCallback(() => {
         const canvas = canvasRef.current;
@@ -222,17 +225,19 @@ export function WorldMap({ dots = [], lineColor = "hsl(220, 15%, 45%)" }: WorldM
             const dx = x - mx;
             const dy = y - my;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            let alpha = 0.18;
-            let radius = 1.2;
+            let alpha = isDark ? 0.18 : 0.4;
+            let radius = isDark ? 1.2 : 1.6;
 
             // Interactive glow near cursor
             if (dist < 120) {
                 const factor = 1 - dist / 120;
-                alpha = 0.18 + 0.5 * factor;
-                radius = 1.2 + 0.8 * factor;
+                alpha = (isDark ? 0.18 : 0.4) + 0.5 * factor;
+                radius = (isDark ? 1.2 : 1.6) + 0.8 * factor;
             }
 
-            ctx.fillStyle = `rgba(180, 195, 220, ${alpha})`;
+            ctx.fillStyle = isDark
+                ? `rgba(180, 195, 220, ${alpha})`
+                : `rgba(20, 30, 60, ${alpha})`;
             ctx.beginPath();
             ctx.arc(x, y, radius, 0, Math.PI * 2);
             ctx.fill();
@@ -320,9 +325,9 @@ export function WorldMap({ dots = [], lineColor = "hsl(220, 15%, 45%)" }: WorldM
 
             // Outer glow
             const gradient = ctx.createRadialGradient(pos.x, pos.y, 0, pos.x, pos.y, pulse.size * 5);
-            gradient.addColorStop(0, `rgba(255, 255, 255, ${pulse.opacity * 0.8})`);
-            gradient.addColorStop(0.4, `rgba(200, 220, 255, ${pulse.opacity * 0.2})`);
-            gradient.addColorStop(1, `rgba(200, 220, 255, 0)`);
+            gradient.addColorStop(0, isDark ? `rgba(255, 255, 255, ${pulse.opacity * 0.8})` : `rgba(30, 40, 80, ${pulse.opacity * 0.8})`);
+            gradient.addColorStop(0.4, isDark ? `rgba(200, 220, 255, ${pulse.opacity * 0.2})` : `rgba(50, 70, 120, ${pulse.opacity * 0.2})`);
+            gradient.addColorStop(1, isDark ? `rgba(200, 220, 255, 0)` : `rgba(50, 70, 120, 0)`);
 
             ctx.beginPath();
             ctx.arc(pos.x, pos.y, pulse.size * 5, 0, Math.PI * 2);
@@ -332,7 +337,7 @@ export function WorldMap({ dots = [], lineColor = "hsl(220, 15%, 45%)" }: WorldM
             // Core dot
             ctx.beginPath();
             ctx.arc(pos.x, pos.y, pulse.size, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${pulse.opacity})`;
+            ctx.fillStyle = isDark ? `rgba(255, 255, 255, ${pulse.opacity})` : `rgba(30, 40, 80, ${pulse.opacity})`;
             ctx.fill();
 
             // Trail
@@ -343,7 +348,7 @@ export function WorldMap({ dots = [], lineColor = "hsl(220, 15%, 45%)" }: WorldM
                 const trailAlpha = pulse.opacity * (1 - trail / 7);
                 ctx.beginPath();
                 ctx.arc(tp.x, tp.y, pulse.size * 0.5, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(200, 220, 255, ${trailAlpha * 0.4})`;
+                ctx.fillStyle = isDark ? `rgba(200, 220, 255, ${trailAlpha * 0.4})` : `rgba(40, 60, 110, ${trailAlpha * 0.4})`;
                 ctx.fill();
             }
         });
@@ -368,7 +373,7 @@ export function WorldMap({ dots = [], lineColor = "hsl(220, 15%, 45%)" }: WorldM
 
         ctx.restore();
         animFrameRef.current = requestAnimationFrame(draw);
-    }, [dots, lineColor, hoveredLine]);
+    }, [dots, lineColor, hoveredLine, isDark]);
 
     useEffect(() => {
         // Seed initial pulses

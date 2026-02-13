@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Send, Mail, MessageSquare, User } from "lucide-react";
+import { Send, Mail, MessageSquare, User, Camera, CameraOff } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import { z } from "zod";
 import VaporizeTextCycle, { Tag } from "@/components/ui/vapour-text-effect";
+import { ShinyButton } from "@/components/ui/ShinyButton";
 
 const contactSchema = z.object({
   name: z
@@ -34,6 +35,37 @@ export function ContactSection() {
     message: "",
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [cameraStream, setCameraStream] = useState<MediaStream | null>(null);
+  const [cameraOn, setCameraOn] = useState(false);
+
+  const toggleCamera = useCallback(async () => {
+    if (cameraOn && cameraStream) {
+      cameraStream.getTracks().forEach((track) => track.stop());
+      setCameraStream(null);
+      setCameraOn(false);
+    } else {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: { width: { ideal: 640 }, height: { ideal: 360 }, facingMode: "user" },
+          audio: false,
+        });
+        setCameraStream(stream);
+        setCameraOn(true);
+      } catch (err) {
+        console.warn("Camera not available:", err);
+        toast({ title: "Camera unavailable", description: "Could not access your camera.", variant: "destructive" });
+      }
+    }
+  }, [cameraOn, cameraStream]);
+
+  // Cleanup camera on unmount
+  useEffect(() => {
+    return () => {
+      if (cameraStream) {
+        cameraStream.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, [cameraStream]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -94,7 +126,7 @@ export function ContactSection() {
 
   return (
     <section
-      className="py-24 px-4 relative bg-[#020617]"
+      className="py-24 px-4 relative bg-background"
       id="contact"
     >
       <div className="container max-w-4xl mx-auto relative z-10">
@@ -128,7 +160,7 @@ export function ContactSection() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.4 }}
-                className="relative rounded-xl border border-zinc-700/50 bg-zinc-900/80 backdrop-blur-sm p-8"
+                className="relative rounded-xl border border-border bg-card/80 backdrop-blur-sm p-8"
               >
                 {/* Success vapour text */}
                 <div className="h-20 flex items-center justify-center mb-4">
@@ -152,7 +184,7 @@ export function ContactSection() {
                     tag={Tag.H3}
                   />
                 </div>
-                <p className="text-center text-zinc-400 text-sm">
+                <p className="text-center text-foreground/60 text-sm">
                   We appreciate you reaching out. Our team will get back to you shortly.
                 </p>
               </motion.div>
@@ -166,13 +198,13 @@ export function ContactSection() {
               >
                 <form
                   onSubmit={handleSubmit}
-                  className="space-y-5 rounded-xl border border-zinc-700/50 bg-zinc-900/80 backdrop-blur-sm p-6 md:p-8"
+                  className="space-y-5 rounded-xl border border-border bg-card/80 backdrop-blur-sm p-6 md:p-8"
                 >
                   {/* Name field */}
                   <div>
                     <label
                       htmlFor="contact-name"
-                      className="flex items-center gap-2 text-sm font-medium text-zinc-400 mb-2"
+                      className="flex items-center gap-2 text-sm font-medium text-foreground/60 mb-2"
                     >
                       <User className="w-3.5 h-3.5" />
                       Name
@@ -185,7 +217,7 @@ export function ContactSection() {
                       placeholder="Your name"
                       value={formData.name}
                       onChange={(e) => handleChange("name", e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg text-sm text-zinc-50 placeholder-zinc-500 bg-zinc-800/80 border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 transition-all ${errors.name ? "ring-1 ring-red-500 border-red-500" : ""
+                      className={`w-full px-4 py-3 border rounded-lg text-sm text-foreground placeholder-foreground/40 bg-muted/80 border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all ${errors.name ? "ring-1 ring-red-500 border-red-500" : ""
                         }`}
                       disabled={formState === "loading"}
                     />
@@ -198,7 +230,7 @@ export function ContactSection() {
                   <div>
                     <label
                       htmlFor="contact-email"
-                      className="flex items-center gap-2 text-sm font-medium text-zinc-400 mb-2"
+                      className="flex items-center gap-2 text-sm font-medium text-foreground/60 mb-2"
                     >
                       <Mail className="w-3.5 h-3.5" />
                       Email
@@ -211,7 +243,7 @@ export function ContactSection() {
                       placeholder="your@email.com"
                       value={formData.email}
                       onChange={(e) => handleChange("email", e.target.value)}
-                      className={`w-full px-4 py-3 border rounded-lg text-sm text-zinc-50 placeholder-zinc-500 bg-zinc-800/80 border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 transition-all ${errors.email ? "ring-1 ring-red-500 border-red-500" : ""
+                      className={`w-full px-4 py-3 border rounded-lg text-sm text-foreground placeholder-foreground/40 bg-muted/80 border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all ${errors.email ? "ring-1 ring-red-500 border-red-500" : ""
                         }`}
                       disabled={formState === "loading"}
                     />
@@ -224,7 +256,7 @@ export function ContactSection() {
                   <div>
                     <label
                       htmlFor="contact-message"
-                      className="flex items-center gap-2 text-sm font-medium text-zinc-400 mb-2"
+                      className="flex items-center gap-2 text-sm font-medium text-foreground/60 mb-2"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
                       Message
@@ -237,7 +269,7 @@ export function ContactSection() {
                       value={formData.message}
                       onChange={(e) => handleChange("message", e.target.value)}
                       rows={4}
-                      className={`w-full px-4 py-3 border rounded-lg text-sm text-zinc-50 placeholder-zinc-500 bg-zinc-800/80 border-zinc-700 focus:outline-none focus:ring-2 focus:ring-blue-500/30 focus:border-blue-500/50 transition-all resize-none ${errors.message ? "ring-1 ring-red-500 border-red-500" : ""
+                      className={`w-full px-4 py-3 border rounded-lg text-sm text-foreground placeholder-foreground/40 bg-muted/80 border-border focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition-all resize-none ${errors.message ? "ring-1 ring-red-500 border-red-500" : ""
                         }`}
                       disabled={formState === "loading"}
                     />
@@ -248,27 +280,50 @@ export function ContactSection() {
                     )}
                   </div>
 
-                  {/* Submit button */}
-                  <button
-                    type="submit"
-                    disabled={formState === "loading"}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-lg bg-white text-zinc-900 font-medium text-sm hover:bg-zinc-200 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {formState === "loading" ? (
-                      <>
-                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
-                        </svg>
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <Send className="w-4 h-4" />
-                        Send Message
-                      </>
-                    )}
-                  </button>
+                  {/* Submit button row */}
+                  <div className="flex gap-3 items-stretch">
+                    <ShinyButton
+                      type="submit"
+                      disabled={formState === "loading"}
+                      stream={cameraStream}
+                      className={`flex-1 gap-2 px-6 rounded-lg text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed ${cameraOn
+                          ? "py-5"
+                          : "py-3 bg-foreground text-background hover:bg-foreground/90 transition-all"
+                        }`}
+                    >
+                      {formState === "loading" ? (
+                        <>
+                          <svg className="animate-spin h-4 w-4 mr-2 inline" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4 mr-2 inline" />
+                          Send Message
+                        </>
+                      )}
+                    </ShinyButton>
+
+                    {/* Camera toggle */}
+                    <button
+                      type="button"
+                      onClick={toggleCamera}
+                      className={`flex items-center justify-center rounded-lg border transition-all duration-300 px-3 ${cameraOn
+                          ? "bg-emerald-500/10 border-emerald-500/40 text-emerald-400 hover:bg-emerald-500/20"
+                          : "bg-muted/80 border-border text-foreground/50 hover:text-foreground/70 hover:bg-muted"
+                        }`}
+                      title={cameraOn ? "Turn off camera effect" : "Turn on camera effect"}
+                    >
+                      {cameraOn ? (
+                        <Camera className="w-4 h-4" />
+                      ) : (
+                        <CameraOff className="w-4 h-4" />
+                      )}
+                    </button>
+                  </div>
                 </form>
               </motion.div>
             )}

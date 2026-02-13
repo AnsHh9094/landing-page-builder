@@ -69,7 +69,7 @@ const itemVariants = {
 // CSS-based animated stars
 const StarField = () => {
   return (
-    <div className="absolute inset-0 overflow-hidden">
+    <div className="absolute inset-0 overflow-hidden dark:block hidden">
       {[...Array(100)].map((_, i) => (
         <div
           key={i}
@@ -101,16 +101,16 @@ export function FeaturesSection() {
     });
   }, [color]);
 
-  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, #020617 50%, ${color})`;
+  const backgroundImage = useMotionTemplate`radial-gradient(125% 125% at 50% 0%, hsl(var(--background)) 50%, ${color})`;
 
   return (
     <motion.section
       style={{ backgroundImage }}
-      className="py-24 px-4 relative overflow-hidden bg-[#020617]"
+      className="py-24 px-4 relative overflow-hidden bg-background"
       id="features"
     >
       {/* Bottom gradient fade for smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-[#020617] via-[#020617]/80 to-transparent z-[5]" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-t from-background via-background/80 to-transparent z-[5]" />
 
       {/* Animated Stars Background */}
       <StarField />
@@ -124,7 +124,7 @@ export function FeaturesSection() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-white">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-display font-bold mb-4 text-foreground">
             <MagneticText body="Everything You Need for" as="span" className="block">
               {(tokens) =>
                 tokens.map((token, index) => (
@@ -132,7 +132,7 @@ export function FeaturesSection() {
                 ))
               }
             </MagneticText>
-            <MagneticText body="Private Networking" as="span" className="block text-gray-400">
+            <MagneticText body="Private Networking" as="span" className="block text-foreground/60">
               {(tokens) =>
                 tokens.map((token, index) => (
                   <MagneticText.Token key={index} body={token} className="inline-block cursor-default whitespace-pre" />
@@ -140,7 +140,7 @@ export function FeaturesSection() {
               }
             </MagneticText>
           </h2>
-          <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+          <p className="text-lg text-foreground/60 max-w-2xl mx-auto">
             Built from the ground up for simplicity, security, and reliability.
           </p>
         </motion.div>
@@ -159,17 +159,17 @@ export function FeaturesSection() {
               variants={itemVariants}
               className="group relative"
             >
-              <div className="h-full p-6 rounded-2xl bg-gray-900/50 backdrop-blur-sm border border-gray-700/50 hover:border-gray-600 hover:shadow-lg transition-all duration-300">
+              <div className="h-full p-6 rounded-2xl bg-card/50 backdrop-blur-sm border border-border hover:border-border/80 hover:shadow-lg transition-all duration-300">
                 {/* Icon */}
-                <div className="w-14 h-14 rounded-xl bg-gray-800/50 border border-gray-700/50 flex items-center justify-center mb-4">
-                  <feature.icon className="w-7 h-7 text-gray-300" />
+                <div className="w-14 h-14 rounded-xl bg-muted/50 border border-border flex items-center justify-center mb-4">
+                  <feature.icon className="w-7 h-7 text-foreground/70" />
                 </div>
 
                 {/* Content */}
-                <h3 className="text-xl font-display font-semibold mb-2 text-white">
+                <h3 className="text-xl font-display font-semibold mb-2 text-foreground">
                   {feature.title}
                 </h3>
-                <p className="text-gray-400 leading-relaxed">
+                <p className="text-foreground/60 leading-relaxed">
                   {feature.description}
                 </p>
               </div>

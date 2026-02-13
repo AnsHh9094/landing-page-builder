@@ -50,9 +50,9 @@ export function HeroSection() {
   };
 
   return (
-    <section className="relative min-h-screen overflow-hidden pt-16 bg-[#020617]">
+    <section className="relative min-h-screen overflow-hidden pt-16 bg-background">
       {/* Bottom gradient fade for smooth transition to next section */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#020617] to-transparent z-[5]" />
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent z-[5]" />
       {/* World Map - Full Section Background */}
       <div className="absolute inset-0 flex items-start justify-center pt-16">
         <motion.div
